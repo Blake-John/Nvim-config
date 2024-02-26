@@ -1,30 +1,44 @@
 return {
-	"L3MON4D3/LuaSnip",
-	event = "InsertEnter",
-	-- follow latest release.
-	version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
-	-- install jsregexp (optional!).
-	build = "make install_jsregexp",
-	dependencies = {
-		"rafamadriz/friendly-snippets",
-		config = function()
-			require("luasnip.loaders.from_vscode").lazy_load()
+	{
+		-- the snip server
+		"L3MON4D3/LuaSnip",
+		event = "InsertEnter",
+		-- follow latest release.
+		version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
+		-- install jsregexp (optional!).
+		build = "make install_jsregexp",
+		dependencies = {},
+		opts = {
+			history = true,
+			delete_check_events = "TextChanged",
+		},
+
+		keys = {
+			{
+				"<tab>",
+				function()
+					return require("luasnip").jumpable(1) and "<Plug>luasnip-jump-next" or "<tab>"
+				end,
+				expr = true, silent = true, mode = "i",
+			},
+			{ "<tab>", function() require("luasnip").jump(1) end, mode = "s" },
+			{ "<s-tab>", function() require("luasnip").jump(-1) end, mode = { "i", "s" } },
+		},
+		config = function ()
+			require ("luasnip.loaders.from_vscode").load ({
+				path = { "~/.config/nvim/lua/plugins/my-snippets/package.json" },
+				include = { "python" },
+			})
 		end,
 	},
-	opts = {
-		history = true,
-		delete_check_events = "TextChanged",
-	},
 
-	keys = {
-		{
-			"<tab>",
-			function()
-				return require("luasnip").jumpable(1) and "<Plug>luasnip-jump-next" or "<tab>"
-			end,
-			expr = true, silent = true, mode = "i",
-		},
-		{ "<tab>", function() require("luasnip").jump(1) end, mode = "s" },
-		{ "<s-tab>", function() require("luasnip").jump(-1) end, mode = { "i", "s" } },
-	},
+	-- {
+	-- 	-- the snippets source
+	-- 	"rafamadriz/friendly-snippets",
+	-- 	-- config = function()
+	-- 	-- 	-- require ("luasnip.loaders.from_vscode").lazy_load ({ exclude = all })
+	-- 	-- 	require ("luasnip.loaders.from_vscode").lazy_load ({ path = { "./my-snippets" }})
+	-- 	-- end,
+	-- },
+
 }

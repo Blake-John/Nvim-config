@@ -1,7 +1,7 @@
 -- this file is to config the plugins for the search/find function
 
 return {
-	-- the flash for more easily jumping to target
+	-- the flash for more easily jumping to target, when search with "s"
 	{
 		"folke/flash.nvim",
 		-- event = "VeryLazy",

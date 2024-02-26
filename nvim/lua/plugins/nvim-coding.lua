@@ -24,7 +24,7 @@ return {
 	-- add the cmp for auto code completion
 	{
 		"hrsh7th/nvim-cmp",
-		version = false, -- last release is way too old
+		version = false,
 		event = "InsertEnter",
 		dependencies = {
 			"hrsh7th/cmp-nvim-lsp",
@@ -32,17 +32,8 @@ return {
 			"hrsh7th/cmp-path",
 			"onsails/lspkind.nvim",
 			"saadparwaiz1/cmp_luasnip",
-			-- { 
-			-- 	"tzachar/cmp-fuzzy-buffer",
-			-- 	-- dependencies = {
-			-- 	-- 	"tzachar/fuzzy.nvim",
-			-- 	-- 	"nvim-telescope/telescope-fzf-native.nvim"
-			-- 	-- },
-			-- },
-			-- "tzachar/cmp-fuzzy-path",
-			-- "hrsh7th/cmp-vsnip",
-			-- "hrsh7th/vim-vsnip",
 		},
+		
 		config = function ()
 			require ("cmp").setup ({
 				-- auto select the first item
@@ -51,19 +42,13 @@ return {
 				-- select the completion/snippets engine
 				snippets = {
 					expand = function (args)
-						-- vim.fn["vsnip#anonymous"](args.body) -- For 'vsnip' ysers
 						require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
-						-- require('snippy').expand_snippet(args.body) -- For `snippy` users.
-						-- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
 					end,
 				},
 
-				-- select the snippets sources
+				-- select the snippets sources, the priority is advanced when it larger
 				sources = require ("cmp").config.sources ({
-					-- { name = 'vsnip', priority = 1000 }, -- For vsnip users.
-					{ name = 'luasnip' }, -- For luasnip users.
-					-- { name = 'ultisnips' }, -- For ultisnips users.
-					-- { name = 'snippy' }, -- For snippy users.					{ name = 'buffer' },
+					{ name = 'luasnip', priority = 1000 }, -- For luasnip users.
 					{ name = "nvim_lsp", priority = 900 },
 					{ name = "buffer", priority = 800 },
 					{ name = "path", priority = 700 },
@@ -93,10 +78,17 @@ return {
 					),
 				}),
 
-				-- the snippet windows
-				windows = {
-					completion = require ("cmp").config.window.bordered(),
-					documentation = require ("cmp").config.window.bordered(),
+				-- the snippet windows styles
+				window = {
+					completion = {
+						border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+					},
+					documentation = {
+						border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" }, 
+					},
+					-- or you can use the default style, but the default style is too thin
+					-- completion = require ("cmp").config.window.bordered (),
+					-- documentation = require ("cmp").config.window.bordered (),
 				},
 
 				-- the search snippets
@@ -107,7 +99,7 @@ return {
 					-- the snippets abbrev, input type, the menu
 					fields = { "abbr", "kind", "menu"},
 					format = require ("lspkind").cmp_format ({
-						mode = 'symbol_text', -- show only symbol annotations
+						mode = 'symbol_text', -- show only symbol and text annotations
 						maxwidth = 30,
 						-- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
 						-- can also be a function to dynamically calculate max width such as 
@@ -121,7 +113,7 @@ return {
 							-- set the showing text in the menu
 							vim_item.menu = ({
 								nvim_lsp = "[LSP]",
-								vsnip = "[Snippet]",
+								luasnip = "[Snip]",
 								path = "[Path]",
 								buffer = "[Buffer]",
 							})[entry.source.name]

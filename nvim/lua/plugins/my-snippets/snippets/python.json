@@ -1,0 +1,165 @@
+{
+    "try/except": {
+        "prefix": "try/except",
+        "body": [
+            "try :",
+            "\t${1:pass}",
+            "except ${2:expression} as ${3:identifier} :",
+            "\t${4:pass}"
+        ],
+        "description": "Code snippet for a try/except statement"
+    },
+    "try/finally": {
+        "prefix": "try/finally",
+        "body": ["try :", "\t${1:pass}", "finally :", "\t${2:pass}"],
+        "description": "Code snippet for a try/finally statement"
+    },
+    "try/except/else": {
+        "prefix": "try/except/else",
+        "body": [
+            "try :",
+            "\t${1:pass}",
+            "except ${2:expression} as ${3:identifier} :",
+            "\t${4:pass}",
+            "else :",
+            "\t${5:pass}"
+        ],
+        "description": "Code snippet for a try/except/else statement"
+    },
+    "try/except/finally": {
+        "prefix": "try/except/finally",
+        "body": [
+            "try :",
+            "\t${1:pass}",
+            "except ${2:expression} as ${3:identifier} :",
+            "\t${4:pass}",
+            "finally :",
+            "\t${5:pass}"
+        ],
+        "description": "Code snippet for a try/except/finally statement"
+    },
+    "try/except/else/finally": {
+        "prefix": "try/except/else/finally",
+        "body": [
+            "try :",
+            "\t${1:pass}",
+            "except ${2:expression} as ${3:identifier} :",
+            "\t${4:pass}",
+            "else :",
+            "\t${5:pass}",
+            "finally :",
+            "\t${6:pass}"
+        ],
+        "description": "Code snippet for a try/except/else/finally statement"
+    },
+    "def(class method)": {
+        "prefix": "def class method",
+        "body": [
+            "def ${1:funcname} (self, ${2:parameter_list}) :",
+            "\t${3:pass}"
+        ],
+        "description": "Code snippet for a class method"
+    },
+    "def(static class method)": {
+        "prefix": "def static class method",
+        "body": [
+            "@staticmethod",
+            "def ${1:funcname} (${2:parameter_list}) :",
+            "\t${3:pass}"
+        ],
+        "description": "Code snippet for a static class method"
+    },
+    "def(abstract class method)": {
+        "prefix": "def abstract class method",
+        "body": [
+            "def ${1:funcname} (self, ${2:parameter_list}) :",
+            "\traise NotImplementedError"
+        ],
+        "description": "Code snippet for an abstract class method"
+    },
+    "lambda": {
+        "prefix": "lambda",
+        "body": ["lambda ${1:parameter_list} : ${2:expression}"],
+        "description": "Code snippet for a lambda statement"
+    },
+    "if(main)": {
+        "prefix": "__main__",
+        "body": ["if __name__ == \"__main__\" :", "    ${1:pass}"],
+        "description": "Code snippet for a `if __name__ == \"__main__\": ...` block"
+    },
+
+
+		"if": {
+				"prefix": "if",
+				"body": [
+						"if ${1:condition} :",
+						"\t${2:pass}"
+				],
+				"description": "Code snippet for if"
+		},
+		"elif": {
+				"prefix": "elif",
+				"body": [
+						"elif ${1:condition} :",
+						"\t${2:pass}"
+				],
+				"description": "Code snippet for elif"
+		},
+		"else": {
+				"prefix": "else",
+				"body": ["else :", "\t${1:pass}"],
+				"description": "Code snippet for else"
+		},
+		"while": {
+				"prefix": "while",
+				"body": [
+						"while ${1:condition} :",
+						"\t${2:pass}"
+				],
+				"description": "Code snippet for while"
+		},
+		"for": {
+				"prefix": "for",
+				"body": [
+						"for ${1:i} in ${2:iterator} :",
+						"\t${3:pass}"
+				],
+				"description": "Code snippet for for"
+		},
+		"def": {
+				"prefix": "def",
+				"body": [
+						"def ${1:name} (${2:}) :",
+						"\t${3:pass}"
+				],
+				"description": "Code snippet for def"
+		},
+		"class": {
+				"prefix": "class",
+				"body": [
+						"class ${1:name} (${2:Object}) :",
+						"\tdef __init__ (self, ${3:parameters}) :",
+						"\t\t${4:code}"
+				],
+				"description": "Code snippet for class"
+		},
+		"with": {
+				"prefix": "with",
+				"body": [
+						"with ${1:target} as ${2:variable} :",
+						"\t${3:pass}"
+				],
+				"description": "Code snippet for with"
+		},
+
+    "add/new/cell": {
+        "prefix": "add/new/cell",
+        "body": "# %%",
+        "description": "Code snippet to add a new cell"
+    },
+    "mark/markdown": {
+        "prefix": "mark/markdown",
+        "body": "# %% [markdown]",
+        "description": "Code snippet to add a new markdown cell"
+    }
+}

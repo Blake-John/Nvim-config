@@ -14,3 +14,6 @@ require ("configs.keymaps")
 --     end,
 --   }
 -- )
+-- require ("luasnip.loaders.from_vscode").lazy_load ({
+-- 	path = { "~/.config/nvim/lua/plugins/my-snippets/" },
+-- })

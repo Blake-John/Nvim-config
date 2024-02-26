@@ -7,6 +7,8 @@ map ("n", "<C-h>", "<C-w>h", { desc = "Go to left window" })
 map ("n", "<C-j>", "<C-w>j", { desc = "Go to lower window" })
 map ("n", "<C-k>", "<C-w>k", { desc = "Go to upper window" })
 map ("n", "<C-l>", "<C-w>l", { desc = "Go to right window" })
+map ("n", "j", "gj", { desc = "Down" })
+map ("n", "k", "gk", { desc = "Up" })
 
 map ("i", "<C-h>", "<esc><C-w>h", { desc = "Go to left window" })
 map ("i", "<C-j>", "<esc><C-w>j", { desc = "Go to lower window" })
@@ -34,14 +36,17 @@ map ("n", "<esc>", ":noh<CR>", { desc = "Escape and clear hlsearch" })
 map ("i", ",", ",<c-g>u", {})
 map ("i", ".", ".<c-g>u", {})
 map ("i", ";", ";<c-g>u", {})
+map ("i", ":", ":<c-g>u", {})
+map ("i", "\n", "\n<c-g>u", {})
+map ("i", "<cr>", "<cr><c-g>u", {})
 
 -- better indenting
-map ("v", "<tab>", ">gv", {})
-map ("v", "<S-tab>", "<gv", {})
+map ("v", "<tab>", ">gv", { desc = "Indent Right" })
+map ("v", "<S-tab>", "<gv", { desc = "Indent Left" })
 -- map ("i", "<tab>", "<esc><S-v>>i", {})
 -- map ("i", "<S-tab>", "<esc><S-v><i", {})
-map ("n", "<tab>", "<esc><S-v>><esc>", {})
-map ("n", "<S-tab>", "<esc><S-v><<esc>", {})
+map ("n", "<tab>", "<esc><S-v>><esc>", { desc = "Indent Right" })
+map ("n", "<S-tab>", "<esc><S-v><<esc>", { desc = "Indent Left" })
 
 -- split the windows
 map ("n", "<leader>\\", "<c-w>v", { desc = "Split window Right" })
@@ -52,7 +57,6 @@ map ("n", "<leader>q", "<c-w>q", {desc = "Quit a window" })
 map ("n", "<C-]>", "<cmd>bnext<CR>", { desc = "Next buffer" })
 map ("n", "<C-[>", "<cmd>bprevious<CR>", { desc = "Previous buffer" })
 map ("n", "<leader>bd", "<cmd>bdelete<CR>", { desc = "Delete buffer" })
--- map ("n", "<leader>bD", "<cmd>bdelete<CR>", { desc = "Delete buffer" })
 map ("n", "<leader>bcr", "<cmd>BufferLineCloseRight<CR>", { desc = "Close Right Buffers" })
 map ("n", "<leader>bcl", "<cmd>BufferLineCloseLeft<CR>", { desc = "Close Left Buffers" })
 map ("n", "<leader>bco", "<cmd>BufferLineCloseOthers<CR>", { desc = "Close Other Buffers" })
@@ -61,6 +65,3 @@ map ("n", "<leader>bco", "<cmd>BufferLineCloseOthers<CR>", { desc = "Close Other
 -- terminal
 map ("n", "<C-`>", ":sp | terminal<CR>", { desc = "Terminal Bellow"})
 map ("n", "<C-/>", ":vsp | terminal<CR>", { desc = "Terminal Right"})
-
--- the code running keymaps
--- map ("n", "<C-><A-r>c", ":! ")

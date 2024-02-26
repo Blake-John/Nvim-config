@@ -17,6 +17,9 @@ return {
 			["<leader>s"] = { name = "search" },
 			["<leader>b"] = { name = "buffer" },
 			["<leader>bc"] = { name = "Close Buffer" },
+			["C"] = { name = "CMake" },
+			["<leader>d"] = { name = "debug" },
+			["<leader>dr"] = { name = "run" },
 		},
 	},
 

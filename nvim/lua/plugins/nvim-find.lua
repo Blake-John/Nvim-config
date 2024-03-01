@@ -26,6 +26,7 @@ return {
 			{ "<leader>sh", ":Telescope help_tags<CR>", desc = "Search Help_tags" },
 			{ "<leader>sk", ":Telescope keymaps<CR>", desc = "Search Keymaps" },
 			{ "<leader>ss", ":Telescope live_grep<CR>", desc = "Search Any" },
+			{ "<leader>sp", ":Telescope projects<CR>", desc = "Search Projects" },
 		},
 	},
 	

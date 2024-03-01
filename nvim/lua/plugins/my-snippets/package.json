@@ -1,13 +1,25 @@
 {
 		"name": "nvim-snippets",
 		"engines": {
-				"vscode": "^1.11.0"
+			"vscode": "^1.11.0"
 		},
 		"contributes": {
 				"snippets": [
 						{
-							"language": "python",
+							"language": [
+								"markdown",
+								"global",
+								"all"
+							],
+							"path": "./snippets/global.json"
+						},
+						{
+							"language": [ "python" ],
 							"path": "./snippets/python.json"
+						},
+						{
+							"language": [ "cpp" ],
+							"path": "./snippets/cpp.json"
 						}
 				]
 		}

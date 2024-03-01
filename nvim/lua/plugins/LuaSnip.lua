@@ -25,9 +25,9 @@ return {
 			{ "<s-tab>", function() require("luasnip").jump(-1) end, mode = { "i", "s" } },
 		},
 		config = function ()
-			require ("luasnip.loaders.from_vscode").load ({
-				path = { "~/.config/nvim/lua/plugins/my-snippets/package.json" },
-				include = { "python" },
+			require ("luasnip.loaders.from_vscode").lazy_load ({
+				paths = { "~/.config/nvim/lua/plugins/my-snippets/" },
+				include = { "python", "cpp", "all" },
 			})
 		end,
 	},
@@ -40,5 +40,18 @@ return {
 	-- 	-- 	require ("luasnip.loaders.from_vscode").lazy_load ({ path = { "./my-snippets" }})
 	-- 	-- end,
 	-- },
-
+	
+	{
+		"danymat/neogen",
+		event = "InsertEnter",
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
+		keys = {
+			{"<leader>g", "<cmd>Neogen<CR>", desc = "Generatre Comments String" }
+		},
+    config = function ()
+			require ("neogen").setup ({
+				snippet_engine = "luasnip",
+			})
+		end,
+	}
 }

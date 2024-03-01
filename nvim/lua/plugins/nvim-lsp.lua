@@ -21,6 +21,8 @@ return {
 		-- setup the lsp server
 		-- require ("lspconfig").pyre.setup {}
 		require ("lspconfig").pyright.setup {}
+		require ("lspconfig").cmake.setup {}
 		require ("lspconfig").clangd.setup {}
+		require ("lspconfig").dockerls.setup {}
 	end,
 }

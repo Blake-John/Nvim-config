@@ -113,6 +113,13 @@ return {
 				desc = "Explorer"
 			},
 		},
+		config = function ()
+			require ("neo-tree").setup ({
+				window = {
+					width = 20,
+				}
+			})
+		end,
 	},
 
 

@@ -1,0 +1,44 @@
+{
+	"OpenCV": {
+		"prefix": "cv",
+		"body": [
+			"cmake_minimum_required (VERSION ${1:3.10})",
+			"project (${2:TEST})",
+			"",
+			"add_subdirectory (${5:dir})",
+			"",
+			"find_package (OpenCV REQUIRED)",
+			"",
+			"add_executable (${3:main} ${4:main.cpp})",
+			"",
+			"target_include_directories ($3 PUBLIC \\${OpenCV_INCLUDE_DIRS})",
+			"target_link_libraries ($3 \\${OpenCV_LIBS})",
+			"",
+			"target_link_libraries ($3 $5)"
+		],
+		"description": "Code snippet for cv-main"
+	},
+	"CVLib": {
+		"prefix": "cvlib",
+		"body": [
+			"add_library (${1:lib} ${3:STATIC} ${2:src.cpp})",
+			"",
+			"find_package (OpenCV REQUIRED)",
+			"",
+			"target_include_directories ($1 PUBLIC \\${OpenCV_INCLUDE_LIB})",
+			"target_link_libraries ($1 \\${OpenCV_LIBS})",
+			"",
+			"target_include_directories ($1 PUBLIC ${4:inc|.})"
+		],
+		"description": "Code snippet for cv-lib"
+	},
+	"normallib": {
+		"prefix": "lib",
+		"body": [
+			"add_library (${1:func} ${3:STATIC} ${2:func.cpp})",
+			"",
+			"target_include_directories ($1 PUBLIC ${4:inc|.})"
+		],
+		"description": "Code snippet for normal lib"
+	}
+}

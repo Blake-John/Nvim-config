@@ -27,7 +27,7 @@ return {
 		config = function ()
 			require ("luasnip.loaders.from_vscode").lazy_load ({
 				paths = { "~/.config/nvim/lua/plugins/my-snippets/" },
-				include = { "python", "cpp", "all" },
+				include = { "python", "cpp", "all", "cmake" },
 			})
 		end,
 	},

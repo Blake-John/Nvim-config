@@ -20,6 +20,10 @@
 						{
 							"language": [ "cpp" ],
 							"path": "./snippets/cpp.json"
+						},
+						{
+							"language": [ "cmake" ],
+							"path": "./snippets/cmake.json"
 						}
 				]
 		}

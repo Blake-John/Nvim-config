@@ -87,6 +87,7 @@ return {
 					Include = { fg = "#d33682" },
 					-- Macro = { fg = "#d33682" },
 					Structure = { fg = "#d33682" },
+					Repeat = { fg = "#d33682" }
 				}
 			})
 			vim.cmd("colorscheme onedark")
@@ -170,6 +171,20 @@ return {
 			--   options = { try_as_border = true },
 			-- })
 		},
+
+	},
+
+	-- add the indent hint
+	{
+		"lukas-reineke/indent-blankline.nvim",
+		event = "VeryLazy",
+		config = function ()
+			require ("ibl").setup ({
+				exclude = {
+					filetypes = { "dashboard" }
+				}
+			})
+		end,
 
 	},
 

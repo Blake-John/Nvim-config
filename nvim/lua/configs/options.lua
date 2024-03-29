@@ -25,7 +25,7 @@ opt.pumheight = 10 															-- Maximum number of entries in a popup
 opt.relativenumber = true 											-- Relative line numbers
 opt.sessionoptions = { "buffers", "curdir", "tabpages", "winsize", "help", "globals", "skiprtp", "folds" }
 opt.shiftround = true 													-- Round indent
-opt.shiftwidth = 2 															-- Size of an indent
+opt.shiftwidth = 4 															-- Size of an indent
 opt.shortmess:append({ W = true, I = true, c = true, C = true })
 opt.showmode = true 														-- show the editor mode
 opt.sidescrolloff = 8 													-- Columns of context
@@ -46,7 +46,7 @@ opt.updatetime = 200 														-- Save swap file and trigger CursorHold
 opt.virtualedit = "block" 											-- Allow cursor to move where there is no text in visual block mode
 opt.wildmode = "longest:full,full" 							-- Command-line completion mode
 opt.winminwidth = 5 														-- Minimum window width
-opt.wrap = true 																-- the config of line wrap
+opt.wrap = false																-- the config of line wrap
 
 opt.fillchars = {
   foldopen = "",

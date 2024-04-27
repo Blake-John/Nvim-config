@@ -21,15 +21,7 @@ return {
 		event = "VeryLazy",
 		config = function ()
 			require ("mason-nvim-dap").setup ({
-				-- default settings
-				handlers = {
-					function(config)
-						-- all sources with no handler get passed here
-
-						-- Keep original functionality
-						require('mason-nvim-dap').default_setup(config)
-					end,
-				}
+				handlers = {}
 			})
 		end,
 	},
@@ -37,6 +29,7 @@ return {
 	-- add the ui of the dap plugin
 	{
 		"rcarriga/nvim-dap-ui",
+		dependencies = { "nvim-neotest/nvim-nio" },
 		keys = {
 			{ "<leader>du", function () require ("dapui").toggle () end, desc = "DAP UI" },
 		},

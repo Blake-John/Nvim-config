@@ -1,3 +1,5 @@
+-- print ("load keymaps.lua")
+
 local map = vim.api.nvim_set_keymap
 
 -- map ( <mode>, <key>, <cmd/reflection>, opts)
@@ -57,11 +59,9 @@ map ("n", "<leader>q", "<c-w>q", {desc = "Quit a window" })
 map ("n", "<C-]>", "<cmd>bnext<CR>", { desc = "Next buffer" })
 map ("n", "<C-[>", "<cmd>bprevious<CR>", { desc = "Previous buffer" })
 map ("n", "<leader>bd", "<cmd>bdelete<CR>", { desc = "Delete buffer" })
-map ("n", "<leader>bcr", "<cmd>BufferLineCloseRight<CR>", { desc = "Close Right Buffers" })
-map ("n", "<leader>bcl", "<cmd>BufferLineCloseLeft<CR>", { desc = "Close Left Buffers" })
-map ("n", "<leader>bco", "<cmd>BufferLineCloseOthers<CR>", { desc = "Close Other Buffers" })
 
 
 -- terminal
 map ("n", "<C-`>", ":sp | terminal<CR>", { desc = "Terminal Bellow"})
-map ("n", "<C-/>", ":vsp | terminal<CR>", { desc = "Terminal Right"})
+map ("n", "<C-\\>", ":vsp | terminal<CR>", { desc = "Terminal Right"})
+

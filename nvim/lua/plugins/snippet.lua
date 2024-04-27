@@ -7,7 +7,6 @@ return {
 		version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
 		-- install jsregexp (optional!).
 		build = "make install_jsregexp",
-		dependencies = {},
 		opts = {
 			history = true,
 			delete_check_events = "TextChanged",
@@ -26,8 +25,8 @@ return {
 		},
 		config = function ()
 			require ("luasnip.loaders.from_vscode").lazy_load ({
-				paths = { "~/.config/nvim/lua/plugins/my-snippets/" },
-				include = { "python", "cpp", "all", "cmake" },
+				paths = { "~/.config/nvim/lua/plugins/snippets/" },
+				include = { "python", "cpp", "all", "cmake", "lua" },
 			})
 		end,
 	},
@@ -44,14 +43,14 @@ return {
 	{
 		"danymat/neogen",
 		event = "InsertEnter",
-    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    		dependencies = { "nvim-treesitter/nvim-treesitter" },
 		keys = {
 			{"<leader>g", "<cmd>Neogen<CR>", desc = "Generatre Comments String" }
 		},
-    config = function ()
+		config = function ()
 			require ("neogen").setup ({
-				snippet_engine = "luasnip",
+				snippet_engine = "luasnip"
 			})
-		end,
+		end
 	}
 }

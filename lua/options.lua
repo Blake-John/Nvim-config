@@ -22,6 +22,7 @@ opt.inccommand = "nosplit" 		-- preview incremental substitute
 opt.laststatus = 3 			-- global statusline
 opt.list = false 			-- Show some invisible characters (tabs...
 opt.mouse = "a" 			-- Enable mouse mode
+opt.mousemoveevent = true
 opt.number = true 			-- Print line number
 -- opt.pumblend = 100 			-- Popup blend
 opt.pumheight = 10 			-- Maximum number of entries in a popup

@@ -189,9 +189,14 @@ return {
 					-- 	end
 					-- 	return s
 					-- end,
+					hover = {
+						enabled = true,
+						delay = 200,
+						reveal = { 'close' }
+					},
 					indicator = {
-						icon = " >",
-						style = "icon",
+						-- icon = " >",
+						style = "underline",
 					},
 					show_tab_indicators = true,
 					offsets = {
@@ -208,8 +213,101 @@ return {
 							require('bufferline.groups').builtin.pinned:with({ icon = "" })
 						}
 		            },
+						
 
 				},
+				highlights = {
+					indicator_selected = {
+						sp = "#ffffff",
+					},
+					indicator_visible = {
+						sp = "#777777",
+					},
+					buffer_visible = {
+						sp = "#777777"
+					},
+					buffer_selected = {
+						sp = "#ffffff"
+					},
+					close_button_visible = {
+						sp = "#777777"
+					},
+					close_button_selected = {
+						sp = "#ffffff"
+					},
+					numbers_visible = {
+						sp = "#777777"
+					},
+					numbers_selected = {
+						sp = "#ffffff"
+					},
+					diagnostic_visible = {
+						sp = "#777777"
+					},
+					diagnostic_selected = {
+						sp = "#ffffff"
+					},
+					hint_visible = {
+						sp = "#777777"
+					},
+					hint_selected = {
+						sp = "#ffffff"
+					},
+					info_visible = {
+						sp = "#777777"
+					},
+					info_selected = {
+						sp = "#ffffff"
+					},
+					warning_visible = {
+						sp = "#777777"
+					},
+					warning_selected = {
+						sp = "#ffffff"
+					},
+					error_visible = {
+						sp = "#777777"
+					},
+					error_selected = {
+						sp = "#ffffff"
+					},
+					warning_diagnostic_visible = {
+						sp = "#777777"
+					},
+					warning_diagnostic_selected = {
+						sp = "#ffffff"
+					},
+					error_diagnostic_visible = {
+						sp = "#777777"
+					},
+					error_diagnostic_selected = {
+						sp = "#ffffff"
+					},
+					modified_visible = {
+						sp = "#777777"
+					},
+					modified_selected = {
+						sp = "#ffffff"
+					},
+					separator_selected = {
+						sp = "#777777"
+					},
+					separator_visible = {
+						sp = "#ffffff"
+					},
+					pick_selected = {
+						sp = "#777777"
+					},
+					pick_visible = {
+						sp = "#ffffff"
+					},
+					duplicate_visible = {
+						sp = "#777777"
+					},
+					duplicate = {
+						sp = "#ffffff"
+					},
+				}
 			})
 		end
 	},
@@ -224,7 +322,7 @@ return {
 				yellow	=	"#d39f03",
 				purple	=	"#6c71c4",
 				cyan	=	"#2aa198",
-				blake	=	"#000000"
+				blake	=	"#00000000"
 			}
 			local colorfultheme = {
 				normal = {

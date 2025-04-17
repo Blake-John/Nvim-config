@@ -51,10 +51,11 @@ return {
 			vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with (vim.lsp.handlers.signature_help, {
 				border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" }
 			})
-			require ("neodev").setup ({})
+			require ("neodev").setup{}
 			require ("lspconfig").pyright.setup {}
 			require ("lspconfig").cmake.setup {}
 			require ("lspconfig").clangd.setup {}
+			require("lspconfig").matlab_ls.setup{}
 			require ("lspconfig").lua_ls.setup ({
 				settings = {
 					Lua = {
@@ -64,6 +65,26 @@ return {
 					}
 				}
 			})
+			-- mlang
+			if not require("lspconfig.configs").mlang then
+				local mlang_server = "/home/blake/.config/nvim/lua/plugins/mlang_server.js"
+				require("lspconfig.configs").mlang = {
+					default_config = {
+						name = "mlang",
+						cmd = { "node", mlang_server, "--stdio" },
+						filetypes = { "matlab", "octave", "m" },
+						root_dir = function()
+							return vim.fn.getcwd()
+						end,
+						settings = {
+							settings = {
+								maxNumberOfProblems = 1000,
+							},
+						},
+					},
+				}
+			end
+			require("lspconfig").mlang.setup{}
 		end
 	}
 }

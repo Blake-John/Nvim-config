@@ -55,7 +55,21 @@ return {
 			require ("lspconfig").pyright.setup {}
 			require ("lspconfig").cmake.setup {}
 			require ("lspconfig").clangd.setup {}
-			require("lspconfig").matlab_ls.setup{}
+			require("lspconfig").matlab_ls.setup{
+				cmd = {
+					"node",
+					"/home/blake/.local/share/nvim/mason/bin/matlab-language-server",
+					"--stdio"
+				},
+				filetypes = { "matlab" },
+				settings = {
+					MATLAB = {
+						installPath = "/home/blake/Matlab/R2024a/",
+						telemetry = true,
+						indexWorkspace = true
+					}
+				}
+			}
 			require ("lspconfig").lua_ls.setup ({
 				settings = {
 					Lua = {

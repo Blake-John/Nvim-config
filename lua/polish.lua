@@ -6,6 +6,7 @@
 
 vim.opt.shiftround = true -- Round indent
 vim.opt.shiftwidth = 2 -- Size of an indent
+vim.opt.clipboard = "unnamedplus"
 vim.g.neovide_cursor_trail_size = 0.5
 vim.g.neovide_cursor_animation_length = 0.1
 vim.g.neovide_scroll_animation_length = 0.2

@@ -10,6 +10,7 @@ return {
   { import = "astrocommunity.pack.lua" },
   { import = "astrocommunity.pack.cpp" },
   { import = "astrocommunity.pack.cmake" },
-  -- { import = "astrocommunity.pack.python" },
+  { import = "astrocommunity.pack.python" },
+  { import = "astrocommunity.pack.rust" },
   -- import/override with your plugins folder
 }

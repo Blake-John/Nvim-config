@@ -3,5 +3,3 @@
 -- Add any additional keymaps here
 
 -- use `vim.keymap.set` instead
-local map = LazyVim.safe_keymap_set
-map("n", "<leader>a", "<leader>ca", { desc = "Code Action", remap = true })

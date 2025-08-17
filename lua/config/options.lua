@@ -9,3 +9,8 @@ vim.g.lazyvim_python_lsp = "basedpyright"
 -- vim.o.guifont = "JetBrainsMono Nerd Font:h12"
 vim.o.guifont = "CaskaydiaMono Nerd Font:h12"
 vim.o.shiftwidth = 4
+vim.o.tabstop = 4
+vim.o.softtabstop = 4
+
+-- 视图只能通过全局状态栏完全折叠
+vim.opt.laststatus = 3

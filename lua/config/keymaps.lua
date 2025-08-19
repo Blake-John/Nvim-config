@@ -3,3 +3,13 @@
 -- Add any additional keymaps here
 
 -- use `vim.keymap.set` instead
+local ks = vim.keymap.set
+
+ks("n", "<leader>/", "<Plug>(comment_toggle_linewise_current)", { desc = "toggle comment" })
+ks("v", "<leader>/", "<Plug>(comment_toggle_linewise_visual)", { desc = "toggle comment" })
+
+local wk = require("which-key")
+
+wk.add({
+  { "<leader>a", group = "avante" },
+}, {})

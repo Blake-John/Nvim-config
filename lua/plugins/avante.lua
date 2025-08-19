@@ -4,8 +4,17 @@ return {
   -- ⚠️ must add this setting! ! !
   build = vim.fn.has("win32") ~= 0 and "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false"
     or "make",
-  event = "VeryLazy",
+  keys = {
+    {
+      "<leader>aa",
+      function()
+        require("avante.api").ask()
+      end,
+      desc = "avante: ask",
+    },
+  },
   version = false, -- Never set this value to "*"! Never!
+  lazy = true,
   ---@module 'avante'
   ---@type avante.Config
   opts = {
@@ -43,7 +52,8 @@ return {
     "ibhagwan/fzf-lua", -- for file_selector provider fzf
     "stevearc/dressing.nvim", -- for input provider dressing
     "folke/snacks.nvim", -- for input provider snacks
-    "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
+    -- "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
+    "echasnovski/mini.icons",
     -- "zbirenbaum/copilot.lua", -- for providers='copilot'
     {
       -- support for image pasting

@@ -18,6 +18,22 @@ return {
     end,
   },
 
+  {
+    "mason-org/mason.nvim",
+    lazy = true,
+    opts = {
+      ui = {
+        border = "rounded",
+      },
+      ensure_installed = {
+        "stylua",
+        "shellcheck",
+        "shfmt",
+        "flake8",
+      },
+    },
+  },
+
   -- test new blink
   { import = "nvchad.blink.lazyspec" },
 

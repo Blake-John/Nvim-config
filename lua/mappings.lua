@@ -33,6 +33,7 @@ map("n", "<leader>fs", ":lua Snacks.picker.lsp_symbols()<cr>", { desc = "find bu
 map("n", "<leader>fr", ":lua Snacks.picker.lsp_references()<cr>", { desc = "find buffer symbols" })
 map("n", "<leader>fw", ":lua Snacks.picker.grep_buffers()<cr>", { desc = "grep in buffer" })
 map("n", "<leader>fW", ":lua Snacks.picker.grep()<cr>", { desc = "grep" })
+map("n", "<leader>fp", ":lua Snacks.picker.projects()<cr>")
 
 -- map("n", "gR", ":lua Snacks.picker.lsp_references()<cr>", { desc = "find buffer symbols" })
 

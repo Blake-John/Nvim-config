@@ -1,3 +1,6 @@
+-- NOTE: comment this to enable the module
+-- if true then return {} end
+
 return {
   {
     "mrcjkb/rustaceanvim",

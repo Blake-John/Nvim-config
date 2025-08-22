@@ -52,41 +52,4 @@ return {
 			})
 		end,
 	},
-	-- {
-	-- 	"neovim/nvim-lspconfig",
-	-- 	event = "BufRead",
-	-- 	dependencies = {
-	-- 		{
-	-- 			"mason-org/mason-lspconfig.nvim",
-	-- 			event = "BufRead",
-	-- 			opts = {
-	-- 				automatic_enable = true,
-	-- 			},
-	-- 		},
-	-- 		"saghen/blink.cmp",
-	-- 	},
-	--
-	-- 	-- example using `opts` for defining servers
-	-- 	opts = {
-	-- 		servers = {
-	-- 			lua_ls = {},
-	-- 		},
-	-- 		inlay_hints = {
-	-- 			enabled = true,
-	-- 		},
-	-- 		codelens = {
-	-- 			enabled = true,
-	-- 		},
-	-- 	},
-	--
-	-- 	config = function(_, opts)
-	-- 		local lspconfig = require("lspconfig")
-	-- 		for server, config in pairs(opts.servers) do
-	-- 			-- passing config.capabilities to blink.cmp merges with the capabilities in your
-	-- 			-- `opts[server].capabilities, if you've defined it
-	-- 			config.capabilities = require("blink.cmp").get_lsp_capabilities(config.capabilities)
-	-- 			lspconfig[server].setup(config)
-	-- 		end
-	-- 	end,
-	-- },
 }

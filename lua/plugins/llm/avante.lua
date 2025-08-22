@@ -12,6 +12,13 @@ return {
 			end,
 			desc = "avante: ask",
 		},
+		{
+			"<leader>an",
+			function()
+				require("avante.api").new({ new_chat = true })
+			end,
+			desc = "avante: new",
+		},
 	},
 	version = false, -- Never set this value to "*"! Never!
 	lazy = true,
@@ -24,7 +31,7 @@ return {
 		providers = {
 			openai = {
 				endpoint = "https://apis.iflow.cn/v1",
-				model = "Qwen3-Coder",
+				model = "qwen3-coder",
 				timeout = 30000, -- Timeout in milliseconds
 				extra_request_body = {
 					temperature = 0.75,
@@ -41,6 +48,25 @@ return {
 				},
 			},
 		},
+		custom_tools = function()
+			return { require("mcphub.extensions.avante").mcp_tool() }
+		end,
+		system_prompt = function()
+			local hub = require("mcphub").get_hub_instance()
+			return hub and hub:get_active_servers_prompt() or ""
+		end,
+		disabled_tools = {
+			"list_files", -- Built-in file operations
+			"search_files",
+			"read_file",
+			"create_file",
+			"rename_file",
+			"delete_file",
+			"create_dir",
+			"rename_dir",
+			"delete_dir",
+			"bash", -- Built-in terminal access
+		},
 	},
 	dependencies = {
 		"nvim-lua/plenary.nvim",
@@ -55,6 +81,7 @@ return {
 		-- "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
 		"echasnovski/mini.icons",
 		-- "zbirenbaum/copilot.lua", -- for providers='copilot'
+
 		-- {
 		-- 	-- support for image pasting
 		-- 	"HakonHarnes/img-clip.nvim",
@@ -69,28 +96,6 @@ return {
 		-- 			},
 		-- 			-- required for Windows users
 		-- 			use_absolute_path = true,
-		-- 		},
-		-- 		system_prompt = function()
-		-- 			local hub = require("mcphub").get_hub_instance()
-		-- 			return hub and hub:get_active_servers_prompt() or ""
-		-- 		end,
-		-- 		-- Using function prevents requiring mcphub before it's loaded
-		-- 		custom_tools = function()
-		-- 			return {
-		-- 				require("mcphub.extensions.avante").mcp_tool(),
-		-- 			}
-		-- 		end,
-		-- 		disabled_tools = {
-		-- 			"list_files", -- Built-in file operations
-		-- 			"search_files",
-		-- 			"read_file",
-		-- 			"create_file",
-		-- 			"rename_file",
-		-- 			"delete_file",
-		-- 			"create_dir",
-		-- 			"rename_dir",
-		-- 			"delete_dir",
-		-- 			"bash", -- Built-in terminal access
 		-- 		},
 		-- 	},
 		-- },

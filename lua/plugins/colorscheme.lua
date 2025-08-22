@@ -1,15 +1,23 @@
 return {
-	{ "typicode/bg.nvim", lazy = false },
+	-- { "typicode/bg.nvim", lazy = false },
 	-- Configure LazyVim to load gruvbox
 	{
 		"navarasu/onedark.nvim",
-        config = function()
-    require('onedark').setup {
-      style = 'darker'
-    }
-    -- Enable theme
-    require('onedark').load()
-  end
+		config = function()
+			require("onedark").setup({
+				style = "darker",
+				diagnostics = {
+					darker = false,
+				},
+				highlights = {
+					Comment = { fg = "#7A818E" },
+					["@lsp.type.comment"] = { fg = "#7A818E" },
+					["@comment"] = { fg = "#7A818E" },
+				},
+			})
+			-- Enable theme
+			require("onedark").load()
+		end,
 	},
 	{
 		"saghen/blink.cmp",

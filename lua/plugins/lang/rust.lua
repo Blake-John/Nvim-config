@@ -1,6 +1,49 @@
 -- NOTE: comment to enable rust
 -- if true then return {} end
+require("which-key").add({
+	{ "<leader>r", group = "run" },
+	{ "<leader>cc", group = "crates" },
+}, {})
 return {
+	{
+		"saecki/crates.nvim",
+		event = "BufRead Cargo.toml",
+		keys = {
+			{
+				"<leader>ccv",
+				"<cmd>Crates show_versions_popup<cr><cmd>Crates show_versions_popup<cr>",
+				ft = "toml",
+				desc = "show crate versions",
+			},
+			{
+				"<leader>ccf",
+				"<cmd>Crates show_features_popup<cr><cmd>Crates show_features_popup<cr>",
+				ft = "toml",
+				desc = "show crate features",
+			},
+			{
+				"<leader>ccu",
+				"<cmd>Crates upgrade_crate<cr>",
+				ft = "toml",
+				desc = "upgrade crate",
+			},
+			{
+				"<leader>ccU",
+				"<cmd>Crates upgrade_all_crates<cr>",
+				ft = "toml",
+				desc = "upgrade all crates",
+			},
+		},
+		opts = {
+			lsp = {
+				name = "crates.nvim",
+				enabled = true,
+				actions = true,
+				completion = true,
+				hover = true,
+			},
+		},
+	},
 	{
 		"mrcjkb/rustaceanvim",
 		version = "^6",
@@ -21,36 +64,36 @@ return {
 		opts = {
 			server = {
 				on_attach = function(client, bufnr)
-                    local signs = {
-                        Error = "󰅚",   -- 或 ""
-                        Warn  = "󰀪",   -- 或 ""
-                        Hint  = "󰌶",   -- 或 "󰌵"
-                        Info  = "󰋽",   -- 或 ""
-                    }
-                    vim.diagnostic.config({
-                        signs = {
-                            -- 一次性定义 4 个级别的图标
-                            text = {
-                                [vim.diagnostic.severity.ERROR] = '󰅚',
-                                [vim.diagnostic.severity.WARN ] = '󰀪',
-                                [vim.diagnostic.severity.HINT ] = '󰌶',
-                                [vim.diagnostic.severity.INFO ] = '󰋽',
-                            },
-                            -- 保留 1 个字符宽度的固定列，避免整行左右抖动
-                            numhl = false,
-                        },
-                        underline = true,
-                        update_in_insert = true,
-                        severity_sort = true,
-                        virtual_text = {
-                            spacing = 4,
-                            source = "if_many",
-                            prefix = "●",
-                            -- this will set set the prefix to a function that returns the diagnostics icon based on the severity
-                            -- this only works on a recent 0.10.0 build. Will be set to "●" when not supported
-                            -- prefix = "icons",
-                        },
-                    })
+					local signs = {
+						Error = "󰅚", -- 或 ""
+						Warn = "󰀪", -- 或 ""
+						Hint = "󰌶", -- 或 "󰌵"
+						Info = "󰋽", -- 或 ""
+					}
+					vim.diagnostic.config({
+						signs = {
+							-- 一次性定义 4 个级别的图标
+							text = {
+								[vim.diagnostic.severity.ERROR] = "󰅚",
+								[vim.diagnostic.severity.WARN] = "󰀪",
+								[vim.diagnostic.severity.HINT] = "󰌶",
+								[vim.diagnostic.severity.INFO] = "󰋽",
+							},
+							-- 保留 1 个字符宽度的固定列，避免整行左右抖动
+							numhl = false,
+						},
+						underline = true,
+						update_in_insert = true,
+						severity_sort = true,
+						virtual_text = {
+							spacing = 4,
+							source = "if_many",
+							prefix = "●",
+							-- this will set set the prefix to a function that returns the diagnostics icon based on the severity
+							-- this only works on a recent 0.10.0 build. Will be set to "●" when not supported
+							-- prefix = "icons",
+						},
+					})
 					-- inlay_hint
 					if client.server_capabilities.inlayHintProvider then
 						vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
@@ -66,8 +109,39 @@ return {
 						})
 					end
 					-- keymap
-					vim.keymap.set("n", "<leader>rr", "<cmd>RustLsp run<CR>", { buffer = bufnr })
-					vim.keymap.set("n", "<leader>rd", "<cmd>RustLsp debug<CR>", { buffer = bufnr })
+					vim.keymap.set("n", "<leader>rr", function()
+						vim.cmd.RustLsp({ "runnables", bang = true })
+					end, { desc = "run previous runnable", buffer = bufnr })
+					vim.keymap.set("n", "<leader>rR", function()
+						vim.cmd.RustLsp("runnables")
+					end, { desc = "show runnables", buffer = bufnr })
+					vim.keymap.set("n", "<leader>rd", function()
+						vim.cmd.RustLsp("debuggables")
+					end, { desc = "show debuggables", buffer = bufnr })
+					vim.keymap.set("n", "<leader>rD", function()
+						vim.cmd.RustLsp("openDocs")
+					end, { desc = "open docs of current symbol", buffer = bufnr })
+					vim.keymap.set("n", "<leader>rt", function()
+						vim.cmd.RustLsp("testables")
+					end, { desc = "show testables", buffer = bufnr })
+					vim.keymap.set("n", "<leader>ce", function()
+						vim.cmd.RustLsp({ "explainError", "current" })
+					end, { desc = "explain errors", buffer = bufnr })
+					vim.keymap.set("n", "<leader>cd", function()
+						vim.cmd.RustLsp({ "renderDiagnostic", "current" })
+					end, { desc = "show line diagnostic", remap = true, buffer = bufnr })
+					vim.keymap.set("n", "]d", function()
+						vim.cmd.RustLsp({ "renderDiagnostic", "cycle" })
+					end, { desc = "next line diagnostic", remap = true, buffer = bufnr })
+					vim.keymap.set("n", "[d", function()
+						vim.cmd.RustLsp({ "renderDiagnostic", "cycle_prev" })
+					end, { desc = "show line diagnostic", remap = true, buffer = bufnr })
+					vim.keymap.set("n", "<leader>cc", function()
+						vim.cmd.RustLsp("openCargo")
+					end, { desc = "open Cargo.toml", remap = true, buffer = bufnr })
+					vim.keymap.set("n", "<S-j>", function()
+						vim.cmd.RustLsp("joinLines")
+					end, { desc = "smart join lines", buffer = bufnr })
 				end,
 				default_settings = {
 					["rust-analyzer"] = {
@@ -129,8 +203,8 @@ return {
 				},
 			},
 		},
-        config = function(_, opts)
-            vim.g.rustaceanvim = vim.tbl_deep_extend("keep", vim.g.rustaceanvim or {}, opts or {})
-        end,
+		config = function(_, opts)
+			vim.g.rustaceanvim = vim.tbl_deep_extend("keep", vim.g.rustaceanvim or {}, opts or {})
+		end,
 	},
 }

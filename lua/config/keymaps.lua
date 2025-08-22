@@ -51,6 +51,12 @@ map("i", "<C-k>", "<esc>ka", { desc = "move up" })
 -- quit
 map("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Quit All" })
 
+-- scroll by line
+map({ "n", "v", "o" }, "<C-S-k>", "<C-y>", { remap = true, desc = "scroll line up" })
+map({ "n", "v", "o" }, "<C-S-j>", "<C-e>", { remap = true, desc = "scroll line down" })
+map("i", "<C-S-k>", "<esc><C-y>gi", { remap = true, desc = "scroll line up" })
+map("i", "<C-S-j>", "<esc><C-e>gi", { remap = true, desc = "scroll line down" })
+
 -- NOTE: comment
 map("n", "<leader>/", "gcc", { desc = "toggle comment", remap = true })
 map("v", "<leader>/", "gc", { desc = "toggle comment", remap = true })
@@ -116,6 +122,7 @@ end, { desc = "toggle file tree" })
 map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save File" })
 
 -- NOTE: finder
+--
 -- map("n", "<leader>ff", "<cmd>lua Snacks.picker.files()<cr>", { desc = "find files" })
 -- map("n", "<leader>fb", "<cmd>lua Snacks.picker.buffers()<cr>", { desc = "find buffers" })
 -- map("n", "<leader>fk", "<cmd>lua Snacks.picker.keymaps()<cr>", { desc = "find keymaps" })
@@ -192,62 +199,111 @@ map("n", "[q", vim.cmd.cprev, { desc = "Previous Quickfix" })
 map("n", "]q", vim.cmd.cnext, { desc = "Next Quickfix" })
 
 -- NOTE: Snacks toggle options
-map("n", "<leader>us", function()
-	Snacks.toggle.option("spell", { name = "Spelling" })
-end, { desc = "Toggle Spelling" })
-map("n", "<leader>uw", function()
-	Snacks.toggle.option("wrap", { name = "Wrap" })
-end, { desc = "Toggle Wrap" })
-map("n", "<leader>uL", function()
-	Snacks.toggle.option("relativenumber", { name = "Relative Number" })
-end, { desc = "Toggle Relative Number" })
-map("n", "<leader>ud", function()
-	Snacks.toggle.diagnostics()
-end, { desc = "Toggle Diagnostics" })
-map("n", "<leader>ul", function()
-	Snacks.toggle.option("number", { name = "Line Number" })
-end, { desc = "Toggle Line Number" })
-map("n", "<leader>uc", function()
-	Snacks.toggle.option(
-		"conceallevel",
-		{ off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2, name = "Conceal Level" }
-	)
-end, { desc = "Toggle Conceal Level" })
-map("n", "<leader>uA", function()
-	Snacks.toggle.option(
-		"showtabline",
-		{ off = 0, on = vim.o.showtabline > 0 and vim.o.showtabline or 2, name = "Tabline" }
-	)
-end, { desc = "Toggle Tabline" })
-map("n", "<leader>uT", function()
-	Snacks.toggle.treesitter()
-end, { desc = "Toggle Treesitter" })
-map("n", "<leader>ub", function()
-	Snacks.toggle.option("background", { off = "light", on = "dark", name = "Dark Background" })
-end, { desc = "Toggle Dark Background" })
-map("n", "<leader>uD", function()
-	Snacks.toggle.dim()
-end, { desc = "Toggle Dim" })
-map("n", "<leader>ua", function()
-	Snacks.toggle.animate()
-end, { desc = "Toggle Animation" })
-map("n", "<leader>ug", function()
-	Snacks.toggle.indent()
-end, { desc = "Toggle Indent" })
-map("n", "<leader>uS", function()
-	Snacks.toggle.scroll()
-end, { desc = "Toggle Scroll" })
-map("n", "<leader>dpp", function()
-	Snacks.toggle.profiler()
-end, { desc = "Toggle Profiler" })
-map("n", "<leader>dph", function()
-	Snacks.toggle.profiler_highlights()
-end, { desc = "Toggle Profiler Highlights" })
+vim.api.nvim_create_autocmd("User", {
+	pattern = "VeryLazy",
+	callback = function()
+		Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>us")
+	end,
+})
+vim.api.nvim_create_autocmd("User", {
+	pattern = "VeryLazy",
+	callback = function()
+		Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>uw")
+	end,
+})
+vim.api.nvim_create_autocmd("User", {
+	pattern = "VeryLazy",
+	callback = function()
+		Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>uL")
+	end,
+})
+vim.api.nvim_create_autocmd("User", {
+	pattern = "VeryLazy",
+	callback = function()
+		Snacks.toggle.diagnostics():map("<leader>ud")
+	end,
+})
+vim.api.nvim_create_autocmd("User", {
+	pattern = "VeryLazy",
+	callback = function()
+		Snacks.toggle.option("number", { name = "Line Number" }):map("<leader>ul")
+	end,
+})
+vim.api.nvim_create_autocmd("User", {
+	pattern = "VeryLazy",
+	callback = function()
+		Snacks.toggle
+			.option(
+				"conceallevel",
+				{ off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2, name = "Conceal Level" }
+			)
+			:map("<leader>uc")
+	end,
+})
+vim.api.nvim_create_autocmd("User", {
+	pattern = "VeryLazy",
+	callback = function()
+		Snacks.toggle
+			.option("showtabline", { off = 0, on = vim.o.showtabline > 0 and vim.o.showtabline or 2, name = "Tabline" })
+			:map("<leader>uA")
+	end,
+})
+vim.api.nvim_create_autocmd("User", {
+	pattern = "VeryLazy",
+	callback = function()
+		Snacks.toggle.treesitter():map("<leader>uT")
+	end,
+})
+vim.api.nvim_create_autocmd("User", {
+	pattern = "VeryLazy",
+	callback = function()
+		Snacks.toggle.option("background", { off = "light", on = "dark", name = "Dark Background" }):map("<leader>ub")
+	end,
+})
+vim.api.nvim_create_autocmd("User", {
+	pattern = "VeryLazy",
+	callback = function()
+		Snacks.toggle.dim():map("<leader>uD")
+	end,
+})
+vim.api.nvim_create_autocmd("User", {
+	pattern = "VeryLazy",
+	callback = function()
+		Snacks.toggle.animate():map("<leader>ua")
+	end,
+})
+vim.api.nvim_create_autocmd("User", {
+	pattern = "VeryLazy",
+	callback = function()
+		Snacks.toggle.indent():map("<leader>ug")
+	end,
+})
+vim.api.nvim_create_autocmd("User", {
+	pattern = "VeryLazy",
+	callback = function()
+		Snacks.toggle.scroll():map("<leader>uS")
+	end,
+})
+vim.api.nvim_create_autocmd("User", {
+	pattern = "VeryLazy",
+	callback = function()
+		Snacks.toggle.profiler():map("<leader>dpp")
+	end,
+})
+vim.api.nvim_create_autocmd("User", {
+	pattern = "VeryLazy",
+	callback = function()
+		Snacks.toggle.profiler_highlights():map("<leader>dph")
+	end,
+})
 
 if vim.lsp.inlay_hint then
-	map("n", "<leader>uh", function()
-		Snacks.toggle.inlay_hints()
-	end, { desc = "Toggle Inlay Hints" })
+	vim.api.nvim_create_autocmd("User", {
+		pattern = "VeryLazy",
+		callback = function()
+			Snacks.toggle.inlay_hints():map("<leader>uh")
+		end,
+	})
 end
 
 -- NOTE: git and lazygit
@@ -255,13 +311,13 @@ if vim.fn.executable("lazygit") == 1 then
 	map("n", "<leader>gg", function()
 		Snacks.lazygit()
 	end, { desc = "Lazygit" })
-	map("n", "<leader>gB", "<cmd>FzfLua git_blame<cr>", { desc = "find git blame" })
-	map("n", "<leader>gl", "<cmd>FzfLua git_commits<cr>", { desc = "find branch commit log" })
-	map("n", "<leader>gb", "<cmd>FzfLua git_branches<cr>", { desc = "find branch" })
-	map("n", "<leader>gs", "<cmd>FzfLua git_stash<cr>", { desc = "find stash" })
-	map("n", "<leader>gt", "<cmd>FzfLua git_status<cr>", { desc = "find status" })
-	map("n", "<leader>gh", "<cmd>Gitsigns preview_hunk<cr>", { desc = "show git hunk" })
 end
+map("n", "<leader>gB", "<cmd>FzfLua git_blame<cr>", { desc = "find git blame" })
+map("n", "<leader>gl", "<cmd>FzfLua git_commits<cr>", { desc = "find branch commit log" })
+map("n", "<leader>gb", "<cmd>FzfLua git_branches<cr>", { desc = "find branch" })
+map("n", "<leader>gs", "<cmd>FzfLua git_stash<cr>", { desc = "find stash" })
+map("n", "<leader>gt", "<cmd>FzfLua git_status<cr>", { desc = "find status" })
+map("n", "<leader>gh", "<cmd>Gitsigns preview_hunk<cr>", { desc = "show git hunk" })
 
 map({ "n", "x" }, "<leader>gY", function()
 	Snacks.gitbrowse({
@@ -272,7 +328,7 @@ map({ "n", "x" }, "<leader>gY", function()
 	})
 end, { desc = "copy remote url" })
 
--- NOTE: highlights under cursor
+-- NOTE: inspect highlights under cursor
 map("n", "<leader>ui", vim.show_pos, { desc = "Inspect Pos" })
 map("n", "<leader>uI", function()
 	vim.treesitter.inspect_tree()
@@ -301,4 +357,5 @@ require("which-key").add({
 	{ "<leader>g", group = "git" },
 	{ "<leader>g", group = "buffer" },
 	{ "<leader>w", group = "window" },
+	{ "<leader>u", group = "ui" },
 }, {})

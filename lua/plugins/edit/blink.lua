@@ -4,8 +4,8 @@ return {
 	version = "1.",
 	dependencies = {
 		"Kaiser-Yang/blink-cmp-avante",
-		-- ... Other dependencies
-		{ "rafamadriz/friendly-snippets" },
+		"saghen/blink.compat",
+		"rafamadriz/friendly-snippets",
 	},
 	opts = {
 		keymap = {
@@ -20,11 +20,15 @@ return {
 		},
 		sources = {
 			-- Add 'avante' to the list
-			default = { "avante", "lsp", "path", "snippets", "buffer" },
+			default = { "avante", "lsp", "path", "crates", "snippets", "buffer" },
 			providers = {
 				avante = {
 					module = "blink-cmp-avante",
 					name = "Avante",
+				},
+				crates = {
+					name = "crates",
+					module = "blink.compat.source",
 				},
 			},
 		},

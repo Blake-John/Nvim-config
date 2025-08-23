@@ -138,7 +138,7 @@ return {
 					end, { desc = "show line diagnostic", remap = true, buffer = bufnr })
 					vim.keymap.set("n", "<leader>cc", function()
 						vim.cmd.RustLsp("openCargo")
-					end, { desc = "open Cargo.toml", remap = true, buffer = bufnr })
+					end, { desc = "open Cargo.toml", buffer = bufnr })
 					vim.keymap.set("n", "<S-j>", function()
 						vim.cmd.RustLsp("joinLines")
 					end, { desc = "smart join lines", buffer = bufnr })

@@ -2,5 +2,5 @@
 
 ## Showcase
 
-This is a neovim configuration for development with **Any Language** .
+This is a Neovim configuration for development with **Any Language** .
 

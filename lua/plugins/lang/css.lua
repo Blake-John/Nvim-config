@@ -9,8 +9,14 @@ return {
 			},
 		},
 		dependencies = {
-
-			"mason-org/mason.nvim",
+			{
+				"mason-org/mason.nvim",
+				opts = {
+					ensure_installed = {
+						"cssls",
+					},
+				},
+			},
 			"neovim/nvim-lspconfig",
 		},
 	},

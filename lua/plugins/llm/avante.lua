@@ -109,6 +109,7 @@ return {
 		},
 		{
 			"ravitemer/mcphub.nvim",
+			cmd = { "MCPHub" },
 			dependencies = {
 				"nvim-lua/plenary.nvim",
 			},

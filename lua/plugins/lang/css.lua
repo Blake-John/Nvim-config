@@ -7,8 +7,8 @@ return {
 			"neovim/nvim-lspconfig",
 		},
 		opts = function(_, opts)
-			vim.list_extend(opts.ensure_installed or {}, { "cssls" } or {})
-			vim.list_extend(opts.automatic_enable or {}, { "cssls" } or {})
+			vim.list_extend(opts.ensure_installed or {}, { "cssls", "tailwindcss" } or {})
+			vim.list_extend(opts.automatic_enable or {}, { "cssls", "tailwindcss" } or {})
 		end,
 	},
 	{

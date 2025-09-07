@@ -73,21 +73,21 @@ map("n", "]b", "<cmd>bnext<cr>", { desc = "Next Buffer" })
 map("n", "<leader>bb", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
 map("n", "<leader>`", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
 map("n", "<leader>bd", function()
-	Snacks.bufdelete()
+    Snacks.bufdelete()
 end, { desc = "Delete Buffer" })
 map("n", "<leader>bo", function()
-	Snacks.bufdelete.other()
+    Snacks.bufdelete.other()
 end, { desc = "Delete Other Buffers" })
 map("n", "<leader>bD", "<cmd>bd<cr>", { desc = "Delete Buffer and Window" })
 
 -- NOTE: code
 -- diagnostic
 local diagnostic_goto = function(next, severity)
-	local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
-	severity = severity and vim.diagnostic.severity[severity] or nil
-	return function()
-		go({ severity = severity })
-	end
+    local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
+    severity = severity and vim.diagnostic.severity[severity] or nil
+    return function()
+        go({ severity = severity })
+    end
 end
 map("n", "<leader>cd", vim.diagnostic.open_float, { desc = "show line diagnostic" })
 map("n", "]d", diagnostic_goto(true), { desc = "Next Diagnostic" })
@@ -102,10 +102,10 @@ map("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "show code action" })
 
 -- format
 map("n", "<leader>cf", function()
-	require("conform").format({ async = true, lsp_fallback = true })
+    require("conform").format({ async = true, lsp_fallback = true })
 end, { desc = "format buffer" })
 map("v", "<leader>cf", function()
-	require("conform").format({ async = true, lsp_fallback = true })
+    require("conform").format({ async = true, lsp_fallback = true })
 end, { desc = "format selection" })
 
 -- rename
@@ -116,7 +116,7 @@ map("n", "gd", vim.lsp.buf.definition, { desc = "go to definition" })
 
 -- NOTE: file operations
 map("n", "<leader>e", function()
-	Snacks.explorer()
+    Snacks.explorer()
 end, { desc = "toggle file tree" })
 -- save file
 map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save File" })
@@ -159,18 +159,18 @@ map("n", "<leader>fc", "<cmd>lua Snacks.picker.colorschemes()<cr>", { desc = "fi
 
 -- Clear search and stop snippet on escape
 map({ "i", "n", "s" }, "<esc>", function()
-	vim.cmd("noh")
-	-- LazyVim.cmp.actions.snippet_stop()
-	return "<esc>"
+    vim.cmd("noh")
+    -- LazyVim.cmp.actions.snippet_stop()
+    return "<esc>"
 end, { expr = true, desc = "Escape and Clear hlsearch" })
 
 -- Clear search, diff update and redraw
 -- taken from runtime/lua/_editor.lua
 map(
-	"n",
-	"<leader>ur",
-	"<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>",
-	{ desc = "Redraw / Clear hlsearch / Diff Update" }
+    "n",
+    "<leader>ur",
+    "<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>",
+    { desc = "Redraw / Clear hlsearch / Diff Update" }
 )
 
 -- lazy
@@ -181,18 +181,18 @@ map("n", "<leader>nf", "<cmd>enew<cr>", { desc = "New File" })
 
 -- location list
 map("n", "<leader>xl", function()
-	local success, err = pcall(vim.fn.getloclist(0, { winid = 0 }).winid ~= 0 and vim.cmd.lclose or vim.cmd.lopen)
-	if not success and err then
-		vim.notify(err, vim.log.levels.ERROR)
-	end
+    local success, err = pcall(vim.fn.getloclist(0, { winid = 0 }).winid ~= 0 and vim.cmd.lclose or vim.cmd.lopen)
+    if not success and err then
+        vim.notify(err, vim.log.levels.ERROR)
+    end
 end, { desc = "Location List" })
 
 -- quickfix list
 map("n", "<leader>xq", function()
-	local success, err = pcall(vim.fn.getqflist({ winid = 0 }).winid ~= 0 and vim.cmd.cclose or vim.cmd.copen)
-	if not success and err then
-		vim.notify(err, vim.log.levels.ERROR)
-	end
+    local success, err = pcall(vim.fn.getqflist({ winid = 0 }).winid ~= 0 and vim.cmd.cclose or vim.cmd.copen)
+    if not success and err then
+        vim.notify(err, vim.log.levels.ERROR)
+    end
 end, { desc = "Quickfix List" })
 
 map("n", "[q", vim.cmd.cprev, { desc = "Previous Quickfix" })
@@ -200,117 +200,121 @@ map("n", "]q", vim.cmd.cnext, { desc = "Next Quickfix" })
 
 -- NOTE: Snacks toggle options
 vim.api.nvim_create_autocmd("User", {
-	pattern = "VeryLazy",
-	callback = function()
-		Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>us")
-	end,
+    pattern = "VeryLazy",
+    callback = function()
+        Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>us")
+    end,
 })
 vim.api.nvim_create_autocmd("User", {
-	pattern = "VeryLazy",
-	callback = function()
-		Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>uw")
-	end,
+    pattern = "VeryLazy",
+    callback = function()
+        Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>uw")
+    end,
 })
 vim.api.nvim_create_autocmd("User", {
-	pattern = "VeryLazy",
-	callback = function()
-		Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>uL")
-	end,
+    pattern = "VeryLazy",
+    callback = function()
+        Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>uL")
+    end,
 })
 vim.api.nvim_create_autocmd("User", {
-	pattern = "VeryLazy",
-	callback = function()
-		Snacks.toggle.diagnostics():map("<leader>ud")
-	end,
+    pattern = "VeryLazy",
+    callback = function()
+        Snacks.toggle.diagnostics():map("<leader>ud")
+    end,
 })
 vim.api.nvim_create_autocmd("User", {
-	pattern = "VeryLazy",
-	callback = function()
-		Snacks.toggle.option("number", { name = "Line Number" }):map("<leader>ul")
-	end,
+    pattern = "VeryLazy",
+    callback = function()
+        Snacks.toggle.option("number", { name = "Line Number" }):map("<leader>ul")
+    end,
 })
 vim.api.nvim_create_autocmd("User", {
-	pattern = "VeryLazy",
-	callback = function()
-		Snacks.toggle
-			.option(
-				"conceallevel",
-				{ off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2, name = "Conceal Level" }
-			)
-			:map("<leader>uc")
-	end,
+    pattern = "VeryLazy",
+    callback = function()
+        Snacks.toggle
+            .option(
+                "conceallevel",
+                { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2, name = "Conceal Level" }
+            )
+            :map("<leader>uc")
+    end,
 })
 vim.api.nvim_create_autocmd("User", {
-	pattern = "VeryLazy",
-	callback = function()
-		Snacks.toggle
-			.option("showtabline", { off = 0, on = vim.o.showtabline > 0 and vim.o.showtabline or 2, name = "Tabline" })
-			:map("<leader>uA")
-	end,
+    pattern = "VeryLazy",
+    callback = function()
+        Snacks.toggle
+            .option("showtabline", { off = 0, on = vim.o.showtabline > 0 and vim.o.showtabline or 2, name = "Tabline" })
+            :map("<leader>uA")
+    end,
 })
 vim.api.nvim_create_autocmd("User", {
-	pattern = "VeryLazy",
-	callback = function()
-		Snacks.toggle.treesitter():map("<leader>uT")
-	end,
+    pattern = "VeryLazy",
+    callback = function()
+        Snacks.toggle.treesitter():map("<leader>uT")
+    end,
 })
 vim.api.nvim_create_autocmd("User", {
-	pattern = "VeryLazy",
-	callback = function()
-		Snacks.toggle.option("background", { off = "light", on = "dark", name = "Dark Background" }):map("<leader>ub")
-	end,
+    pattern = "VeryLazy",
+    callback = function()
+        Snacks.toggle.option("background", { off = "light", on = "dark", name = "Dark Background" }):map("<leader>ub")
+    end,
 })
 vim.api.nvim_create_autocmd("User", {
-	pattern = "VeryLazy",
-	callback = function()
-		Snacks.toggle.dim():map("<leader>uD")
-	end,
+    pattern = "VeryLazy",
+    callback = function()
+        Snacks.toggle.dim():map("<leader>uD")
+    end,
 })
 vim.api.nvim_create_autocmd("User", {
-	pattern = "VeryLazy",
-	callback = function()
-		Snacks.toggle.animate():map("<leader>ua")
-	end,
+    pattern = "VeryLazy",
+    callback = function()
+        Snacks.toggle.animate():map("<leader>ua")
+    end,
 })
 vim.api.nvim_create_autocmd("User", {
-	pattern = "VeryLazy",
-	callback = function()
-		Snacks.toggle.indent():map("<leader>ug")
-	end,
+    pattern = "VeryLazy",
+    callback = function()
+        Snacks.toggle.indent():map("<leader>ug")
+    end,
 })
 vim.api.nvim_create_autocmd("User", {
-	pattern = "VeryLazy",
-	callback = function()
-		Snacks.toggle.scroll():map("<leader>uS")
-	end,
+    pattern = "VeryLazy",
+    callback = function()
+        Snacks.toggle.scroll():map("<leader>uS")
+    end,
 })
 vim.api.nvim_create_autocmd("User", {
-	pattern = "VeryLazy",
-	callback = function()
-		Snacks.toggle.profiler():map("<leader>dpp")
-	end,
+    pattern = "VeryLazy",
+    callback = function()
+        Snacks.toggle.profiler():map("<leader>dpp")
+    end,
 })
 vim.api.nvim_create_autocmd("User", {
-	pattern = "VeryLazy",
-	callback = function()
-		Snacks.toggle.profiler_highlights():map("<leader>dph")
-	end,
+    pattern = "VeryLazy",
+    callback = function()
+        Snacks.toggle.profiler_highlights():map("<leader>dph")
+    end,
 })
 
 if vim.lsp.inlay_hint then
-	vim.api.nvim_create_autocmd("User", {
-		pattern = "VeryLazy",
-		callback = function()
-			Snacks.toggle.inlay_hints():map("<leader>uh")
-		end,
-	})
+    vim.api.nvim_create_autocmd("User", {
+        pattern = "VeryLazy",
+        callback = function()
+            Snacks.toggle.inlay_hints():map("<leader>uh")
+        end,
+    })
 end
+
+-- map("i", "<C-e>", function()
+--     require("minuet").make_blink_map()
+-- end, { remap = true, desc = "make completion" })
 
 -- NOTE: git and lazygit
 if vim.fn.executable("lazygit") == 1 then
-	map("n", "<leader>gg", function()
-		Snacks.lazygit()
-	end, { desc = "Lazygit" })
+    map("n", "<leader>gg", function()
+        Snacks.lazygit()
+    end, { desc = "Lazygit" })
 end
 map("n", "<leader>gB", "<cmd>FzfLua git_blame<cr>", { desc = "find git blame" })
 map("n", "<leader>gl", "<cmd>FzfLua git_commits<cr>", { desc = "find branch commit log" })
@@ -320,42 +324,52 @@ map("n", "<leader>gt", "<cmd>FzfLua git_status<cr>", { desc = "find status" })
 map("n", "<leader>gh", "<cmd>Gitsigns preview_hunk<cr>", { desc = "show git hunk" })
 
 map({ "n", "x" }, "<leader>gY", function()
-	Snacks.gitbrowse({
-		open = function(url)
-			vim.fn.setreg("+", url)
-		end,
-		notify = false,
-	})
+    Snacks.gitbrowse({
+        open = function(url)
+            vim.fn.setreg("+", url)
+        end,
+        notify = false,
+    })
 end, { desc = "copy remote url" })
 
 -- NOTE: inspect highlights under cursor
 map("n", "<leader>ui", vim.show_pos, { desc = "Inspect Pos" })
 map("n", "<leader>uI", function()
-	vim.treesitter.inspect_tree()
-	vim.api.nvim_input("I")
+    vim.treesitter.inspect_tree()
+    vim.api.nvim_input("I")
 end, { desc = "Inspect Tree" })
 
 -- NOTE: terminal
 -- floating terminal
 map({ "n", "t", "i" }, "<C-`>", function()
-	Snacks.terminal()
+    Snacks.terminal()
 end, { desc = "Terminal (Root Dir)" })
+map({ "n" }, "<leader>tr", function()
+    vim.cmd 'vsplit'
+    vim.cmd 'terminal'
+    vim.cmd 'startinsert'
+end, { desc = "Terminal on Right" })
+map({ "n" }, "<leader>tb", function()
+    vim.cmd 'hsplit'
+    vim.cmd 'terminal'
+    vim.cmd 'startinsert'
+end, { desc = "Terminal on Bottom" })
 
 -- Terminal Mappings
 map("t", "<C-/>", "<cmd>close<cr>", { desc = "Hide Terminal" })
 
 -- NOTE: windows
-map("n", "<leader>wh", "<C-W>s", { desc = "Split Window Below", remap = true })
-map("n", "<leader>wv", "<C-W>v", { desc = "Split Window Right", remap = true })
+map("n", "<leader>wb", "<C-W>s", { desc = "Split Window Below", remap = true })
+map("n", "<leader>wr", "<C-W>v", { desc = "Split Window Right", remap = true })
 map("n", "<leader>wd", "<C-W>c", { desc = "Delete Window", remap = true })
 
 -- NOTE: which-key group
 require("which-key").add({
-	{ "<leader>a", group = "avante" },
-	{ "<leader>c", group = "code" },
-	{ "<leader>f", group = "find" },
-	{ "<leader>g", group = "git" },
-	{ "<leader>g", group = "buffer" },
-	{ "<leader>w", group = "window" },
-	{ "<leader>u", group = "ui" },
+    { "<leader>a", group = "avante" },
+    { "<leader>c", group = "code" },
+    { "<leader>f", group = "find" },
+    { "<leader>g", group = "git" },
+    { "<leader>g", group = "buffer" },
+    { "<leader>w", group = "window" },
+    { "<leader>u", group = "ui" },
 }, {})

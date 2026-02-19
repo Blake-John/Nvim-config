@@ -1,5 +1,5 @@
 return {
-	-- { "typicode/bg.nvim", lazy = false },
+	{ "typicode/bg.nvim", lazy = false },
 	-- Configure LazyVim to load gruvbox
 	{
 		"navarasu/onedark.nvim",

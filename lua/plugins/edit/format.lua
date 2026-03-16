@@ -9,6 +9,7 @@ return {
 				rust = { "rustfmt" },
 				python = { "ruff" },
 				markdown = { "markdownlint" },
+				cpp = { "clang-format" },
 				-- css = { "prettier" },
 				-- html = { "prettier" },
 			},

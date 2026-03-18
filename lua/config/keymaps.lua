@@ -115,11 +115,13 @@ map("n", "<leader>cr", vim.lsp.buf.rename, { desc = "rename symbol" })
 map("n", "gd", vim.lsp.buf.definition, { desc = "go to definition" })
 
 -- NOTE: file operations
-map("n", "<leader>e", function()
-	Snacks.explorer()
-end, { desc = "toggle file tree" })
+-- map("n", "<leader>e", function()
+-- 	Snacks.explorer()
+-- end, { desc = "toggle file tree" })
 -- save file
 map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save File" })
+-- quit nvim
+map({ "i", "x", "n", "s" }, "<C-q>", "<cmd>q<cr><esc>", { desc = "Quit Nvim" })
 
 -- NOTE: finder
 --
@@ -156,6 +158,7 @@ map("n", "<leader>fp", "<cmd>lua Snacks.picker.projects()<cr>", { desc = "find p
 map("n", "<leader>fn", "<cmd>lua Snacks.picker.notifications()<cr>", { desc = "find notifications" })
 map("n", "<leader>fh", "<cmd>FzfLua helptags<cr>", { desc = "find help" })
 map("n", "<leader>fc", "<cmd>lua Snacks.picker.colorschemes()<cr>", { desc = "find colorscheme" })
+map("n", "<leader>fC", "<cmd>FzfLua commands<cr>", { desc = "find commands" })
 
 -- Clear search and stop snippet on escape
 map({ "i", "n", "s" }, "<esc>", function()
@@ -319,8 +322,8 @@ end
 map("n", "<leader>gB", "<cmd>FzfLua git_blame<cr>", { desc = "find git blame" })
 map("n", "<leader>gl", "<cmd>FzfLua git_commits<cr>", { desc = "find branch commit log" })
 map("n", "<leader>gb", "<cmd>FzfLua git_branches<cr>", { desc = "find branch" })
-map("n", "<leader>gs", "<cmd>FzfLua git_stash<cr>", { desc = "find stash" })
-map("n", "<leader>gt", "<cmd>FzfLua git_status<cr>", { desc = "find status" })
+map("n", "<leader>gS", "<cmd>FzfLua git_stash<cr>", { desc = "find stash" })
+map("n", "<leader>gs", "<cmd>FzfLua git_status<cr>", { desc = "find status" })
 map("n", "<leader>gh", "<cmd>Gitsigns preview_hunk<cr>", { desc = "show git hunk" })
 
 map({ "n", "x" }, "<leader>gY", function()
@@ -358,10 +361,14 @@ end, { desc = "Terminal on Bottom" })
 -- Terminal Mappings
 map("t", "<C-/>", "<cmd>close<cr>", { desc = "Hide Terminal" })
 
--- NOTE: windows
+-- NOTE: windows and tabs
 map("n", "<leader>wb", "<C-W>s", { desc = "Split Window Below", remap = true })
 map("n", "<leader>wr", "<C-W>v", { desc = "Split Window Right", remap = true })
 map("n", "<leader>wd", "<C-W>c", { desc = "Delete Window", remap = true })
+
+map("n", "<leader>tt", "<cmd>tab new<cr>", { desc = "New Tab" })
+map("n", "<C-]>", "<cmd>tabnext<cr>", { desc = "Next Tab" })
+map("n", "<C-[>", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
 
 -- NOTE: which-key group
 require("which-key").add({
@@ -369,7 +376,7 @@ require("which-key").add({
 	{ "<leader>c", group = "code" },
 	{ "<leader>f", group = "find" },
 	{ "<leader>g", group = "git" },
-	{ "<leader>g", group = "buffer" },
+	{ "<leader>b", group = "buffer" },
 	{ "<leader>w", group = "window" },
 	{ "<leader>u", group = "ui" },
 }, {})

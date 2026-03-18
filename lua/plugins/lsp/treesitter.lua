@@ -8,7 +8,7 @@ return {
 			keymaps = {
 				init_selection = "gs",
 				node_incremental = "<CR>",
-				scope_incremental = "<C-CR>",
+				scope_incremental = "<A-CR>",
 				node_decremental = "<BS>",
 			},
 		},

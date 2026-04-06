@@ -18,10 +18,10 @@ map("n", "<C-k>", "<C-w>k", { desc = "Go to Upper Window", remap = true })
 map("n", "<C-l>", "<C-w>l", { desc = "Go to Right Window", remap = true })
 
 -- Resize window using <ctrl> arrow keys
-map("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase Window Height" })
-map("n", "<C-Down>", "<cmd>resize -2<cr>", { desc = "Decrease Window Height" })
-map("n", "<C-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease Window Width" })
-map("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase Window Width" })
+map("n", "<C-S-Up>", "<cmd>resize +2<cr>", { desc = "Increase Window Height" })
+map("n", "<C-S-Down>", "<cmd>resize -2<cr>", { desc = "Decrease Window Height" })
+map("n", "<C-S-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease Window Width" })
+map("n", "<C-S-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase Window Width" })
 
 -- Move Lines
 map("n", "<A-j>", "<cmd>m +1<cr>==", { desc = "Move Down" })
@@ -79,6 +79,13 @@ map("n", "<leader>bo", function()
 	Snacks.bufdelete.other()
 end, { desc = "Delete Other Buffers" })
 map("n", "<leader>bD", "<cmd>bd<cr>", { desc = "Delete Buffer and Window" })
+map("n", "<leader>bp", "<cmd>BufferLineTogglePin<CR>", { desc = "Pin the Buffer" })
+map("n", "<leader>b1", "<cmd>lua require ('bufferline').go_to (1, true)<CR>", { desc = "Go to Buffer 1" })
+map("n", "<leader>b2", "<cmd>lua require ('bufferline').go_to (2, true)<CR>", { desc = "Go to Buffer 2" })
+map("n", "<leader>b3", "<cmd>lua require ('bufferline').go_to (3, true)<CR>", { desc = "Go to Buffer 3" })
+map("n", "<leader>b4", "<cmd>lua require ('bufferline').go_to (4, true)<CR>", { desc = "Go to Buffer 4" })
+map("n", "<leader>b5", "<cmd>lua require ('bufferline').go_to (5, true)<CR>", { desc = "Go to Buffer 5" })
+map("n", "<leader>b6", "<cmd>lua require ('bufferline').go_to (6, true)<CR>", { desc = "Go to Buffer 6" })
 
 -- NOTE: code
 -- diagnostic
@@ -98,7 +105,8 @@ map("n", "]w", diagnostic_goto(true, "WARN"), { desc = "Next Warning" })
 map("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
 
 -- action
-map("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "show code action" })
+-- map("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "show code action" })
+map("n", "<leader>ca", "<cmd>FzfLua lsp_code_actions<cr>", { desc = "show code action" })
 
 -- format
 map("n", "<leader>cf", function()
@@ -113,12 +121,25 @@ map("n", "<leader>cr", vim.lsp.buf.rename, { desc = "rename symbol" })
 
 -- goto
 map("n", "gd", vim.lsp.buf.definition, { desc = "go to definition" })
+map("n", "gD", vim.lsp.buf.declaration, { desc = "go to declaratoin" })
+
+-- show definition
+map("n", "<leader>pd", "<cmd>Lspsaga peek_definition<cr>", { desc = "show definition float" })
+
+-- incremental selection
+map("v", "<cr>", "an", { desc = "increment node", remap = true })
+map("v", "<a-cr>", "in", { desc = "decrement node", remap = true })
+
+-- outline
+map("n", "<leader>o", "<cmd>Lspsaga outline<cr>", { desc = "show outline" })
 
 -- NOTE: file operations
 -- map("n", "<leader>e", function()
 -- 	Snacks.explorer()
 -- end, { desc = "toggle file tree" })
 -- save file
+-- map("n", "<leader>e", "<Cmd>Neotree toggle<CR>", { desc = "File Tree" })
+map("n", "<leader>e", "<Cmd>NvimTreeToggle<CR>", { desc = "File Tree" })
 map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save File" })
 -- quit nvim
 map({ "i", "x", "n", "s" }, "<C-q>", "<cmd>q<cr><esc>", { desc = "Quit Nvim" })
@@ -140,7 +161,8 @@ map({ "i", "x", "n", "s" }, "<C-q>", "<cmd>q<cr><esc>", { desc = "Quit Nvim" })
 -- map("n", "<leader>fn", "<cmd>lua Snacks.picker.notifications()<cr>", { desc = "find notifications" })
 -- map("n", "<leader>fh", "<cmd>lua Snacks.picker.help()<cr>", { desc = "find help" })
 -- map("n", "<leader>fc", "<cmd>lua Snacks.picker.colorschemes()<cr>", { desc = "find colorscheme" })
-map("n", "<leader>ff", "<cmd>FzfLua files hidden<cr>", { desc = "find files" })
+map("n", "<leader>ff", "<cmd>FzfLua files<cr>", { desc = "find files" })
+map("n", "<leader>fa", "<cmd>FzfLua files hidden<cr>", { desc = "find all files" })
 map("n", "<leader>fb", "<cmd>FzfLua buffers<cr>", { desc = "find buffers" })
 map("n", "<leader>fk", "<cmd>FzfLua keymaps<cr>", { desc = "find keymaps" })
 map("n", "<leader>ft", "<cmd>lua Snacks.picker.todo_comments()<cr>", { desc = "find todos" })
@@ -157,8 +179,8 @@ map("n", "<leader>fg", "<cmd>FzfLua live_grep<cr>", { desc = "live grep in works
 map("n", "<leader>fp", "<cmd>lua Snacks.picker.projects()<cr>", { desc = "find projects" })
 map("n", "<leader>fn", "<cmd>lua Snacks.picker.notifications()<cr>", { desc = "find notifications" })
 map("n", "<leader>fh", "<cmd>FzfLua helptags<cr>", { desc = "find help" })
-map("n", "<leader>fc", "<cmd>lua Snacks.picker.colorschemes()<cr>", { desc = "find colorscheme" })
-map("n", "<leader>fC", "<cmd>FzfLua commands<cr>", { desc = "find commands" })
+map("n", "<leader>fc", "<cmd>FzfLua commands<cr>", { desc = "find commands" })
+map("n", "<leader>fC", "<cmd>lua Snacks.picker.colorschemes()<cr>", { desc = "find colorscheme" })
 
 -- Clear search and stop snippet on escape
 map({ "i", "n", "s" }, "<esc>", function()
@@ -357,6 +379,7 @@ map({ "n" }, "<leader>tb", function()
 	vim.cmd("terminal")
 	vim.cmd("startinsert")
 end, { desc = "Terminal on Bottom" })
+map({ "n", "t" }, "<leader>tf", "<cmd>Lspsaga term_toggle<cr>", { desc = "toggle float term" })
 
 -- Terminal Mappings
 map("t", "<C-/>", "<cmd>close<cr>", { desc = "Hide Terminal" })
@@ -380,3 +403,8 @@ require("which-key").add({
 	{ "<leader>w", group = "window" },
 	{ "<leader>u", group = "ui" },
 }, {})
+
+-- NOTE: codecompanion
+map({ "n", "v" }, "<leader>at", "<cmd>CodeCompanionChat Toggle<cr>", { desc = "toggle chat" })
+map("v", "<leader>aa", "<cmd>CodeCompanionChat Add<cr>", { desc = "add selected to chat" })
+map({ "n", "v" }, "<leader>ai", ":CodeCompanion<cr>", { desc = "inline mode" })

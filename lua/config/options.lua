@@ -97,15 +97,17 @@ opt.showcmd = false -- hide the cmdline
 
 vim.o.guifont = "CaskaydiaMono Nerd Font:h12"
 
-if vim.fn.has("nvim-0.10") == 1 then
-	opt.smoothscroll = true
-	opt.foldexpr = "v:lua.require'lazyvim.util'.ui.foldexpr()"
-	opt.foldmethod = "expr"
-	opt.foldtext = ""
-else
-	opt.foldmethod = "indent"
-	opt.foldtext = "v:lua.require'lazyvim.util'.ui.foldtext()"
-end
+-- if vim.fn.has("nvim-0.10") == 1 then
+-- 	opt.smoothscroll = true
+-- 	opt.foldexpr = "v:lua.require'lazyvim.util'.ui.foldexpr()"
+-- 	opt.foldmethod = "expr"
+-- 	opt.foldtext = ""
+-- else
+-- 	opt.foldmethod = "indent"
+-- 	opt.foldtext = "v:lua.require'lazyvim.util'.ui.foldtext()"
+-- end
+vim.wo[0][0].foldexpr = "v:lua.vim.treesitter.foldexpr()"
+vim.wo[0][0].foldmethod = "expr"
 
 -- Fix markdown indentation settings
 vim.g.markdown_recommended_style = 0

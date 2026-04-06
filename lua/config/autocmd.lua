@@ -124,3 +124,15 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 		vim.fn.mkdir(vim.fn.fnamemodify(file, ":p:h"), "p")
 	end,
 })
+
+-- auto enable treesitter highlight
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = { "lua", "python", "javascript", "typescript", "c", "cpp", "rust", "yaml", "toml" },
+	callback = function()
+		-- 检查 parser 是否已安装（需提前用 :TSInstall 安装）
+		-- local lang = vim.bo.filetype
+		if pcall(require, "vim.treesitter.language") then
+			vim.treesitter.start(0) -- 0 = 当前 buffer
+		end
+	end,
+})

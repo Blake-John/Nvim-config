@@ -3,7 +3,7 @@ return {
 		"folke/snacks.nvim",
 		event = { "VimEnter", "VeryLazy" },
 		opts = {
-			explorer = { enabled = true },
+			explorer = { enabled = false },
 			indent = { enabled = true },
 			picker = {
 				enabled = true,

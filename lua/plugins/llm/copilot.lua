@@ -6,6 +6,10 @@ return {
 		config = function()
 			-- only for blink completion
 			require("copilot").setup({
+				filetypes = {
+					markdown = true,
+					latex = true,
+				},
 				suggestion = {
 					enabled = false,
 					auto_trigger = false, -- 使用 next prev accept 触发

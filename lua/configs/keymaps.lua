@@ -75,3 +75,10 @@ map("v", "<C-/>", "gcc", { desc = "Toggle comment", remap = true })
 -- vim.keymap.set('n', '<BS>', function() ts_incremental.node_decremental() end, { desc = "Decrease Selection" })
 -- vim.keymap.set('v', '<CR>', function() ts_incremental.node_incremental() end, { desc = "Increase Selection" })
 -- vim.keymap.set('v', '<BS>', function() ts_incremental.node_decremental() end, { desc = "Decrease Selection" })
+--
+-- local function show_plugins()
+--     for _, p in ipairs(vim.api.nvim_list_runtime_paths()) do if p:find("/pack/") then print(p) end end
+-- end
+map("n", "<leader>l",
+    [[:lua count = 1; for _, p in ipairs(vim.api.nvim_list_runtime_paths()) do if p:find("/pack/") then print(p) count = count + 1 end end print("total plugins: " .. count)<cr>]],
+    { desc = "List Plugins" })

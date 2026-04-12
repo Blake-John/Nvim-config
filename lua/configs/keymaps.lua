@@ -69,8 +69,6 @@ end, { desc = "Copy file path" })
 map("n", "<C-/>", "gcc", { desc = "Toggle comment", remap = true })
 map("v", "<C-/>", "gcc", { desc = "Toggle comment", remap = true })
 
-map("n", "<leader>u", ":Undotree<cr>", { desc = "Toggle Undotree" })
-
 -- Tree-sitter incremental selection
 -- local ts_incremental = require('vim.treesitter.incremental')
 -- vim.keymap.set('n', '<CR>', function() ts_incremental.node_incremental() end, { desc = "Increase Selection" })

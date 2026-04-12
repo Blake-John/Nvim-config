@@ -112,7 +112,17 @@ autocmd("BufReadPre", {
 -- which-key - show key hint
 -- ===============================================================
 vim.cmd.packadd("which-key.nvim")
-require("which-key").setup()
+require("which-key").setup({
+    preset = "modern"
+})
+require("which-key").add({
+    { "<leader>c", group = "code" },
+    { "<leader>t", group = "toggle" },
+    { "<leader>w", group = "window" },
+    { "<leader>f", group = "Fuzzy Find" },
+    { "<leader>g", group = "Git" },
+    { "<leader>b", group = "Buffer" },
+})
 
 -- ===============================================================
 -- nvim-web-devicons - add icons for plugin
@@ -140,6 +150,5 @@ autocmd("BufReadPre", {
         vim.cmd.packadd("flash.nvim")
         require("flash").setup()
         map({ "n", "x", "o" }, "s", function() require("flash").jump() end, { desc = "Flash" })
-        map({ "n", "x", "o" }, "S", function() require("flash").treesitter() end, { desc = "Flash Treesitter Select" })
     end
 })

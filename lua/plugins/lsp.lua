@@ -71,11 +71,13 @@ autocmd("BufReadPre", {
 -- =========================================================
 -- mason - lsp, linter, formatter management
 -- =========================================================
-vim.api.nvim_create_user_command("Mason", function()
-    vim.cmd.packadd("mason.nvim")
-    require("mason").setup()
-    vim.cmd("Mason")
-end, {})
+autocmd("BufReadPre", {
+    once = true,
+    callback = function()
+        vim.cmd.packadd("mason.nvim")
+        require("mason").setup()
+    end
+})
 
 -- =========================================================
 -- lspsaga - breadcrumbs, definition, code action ...
@@ -91,7 +93,7 @@ autocmd("BufReadPre", {
         })
 
         map("n", "<leader>o", ":Lspsaga outline<cr>", { desc = "Toggle Outline" })
-        map("n", "<leader>d", ":Lspsaga peek_definition<cr>", { desc = "Peek Definition" })
+        map("n", "<leader>cp", ":Lspsaga peek_definition<cr>", { desc = "Peek Definition" })
     end
 })
 

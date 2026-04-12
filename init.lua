@@ -6,4 +6,4 @@ require("plugins.lsp")
 require("plugins.utils")
 require("plugins.colorscheme")
 require("plugins.edit")
-
+require("plugins.terminal")

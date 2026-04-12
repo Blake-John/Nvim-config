@@ -40,3 +40,23 @@ autocmd("FileType", {
         vim.opt_local.spell = true
     end,
 })
+
+
+-- auto load tree sitter
+autocmd("FileType", {
+    pattern = { "rust", "lua", "python", "javascript", "typescript", "html", "css", "json", "yaml", "toml", "markdown" },
+    callback = function()
+        -- 启动当前文件类型的 Tree-sitter
+        local ok = pcall(vim.treesitter.start, 0)
+        if not ok then
+            vim.notify("Tree-sitter Parser Not Installed: " .. vim.bo.filetype, vim.log.levels.WARN)
+        end
+    end,
+})
+
+autocmd("BufWritePre", {
+    pattern = "*",
+    callback = function()
+        vim.lsp.buf.format()
+    end,
+})

@@ -1,5 +1,4 @@
 vim.opt.termguicolors = true
-vim.cmd.colorscheme("habamax")
 
 vim.opt.number = true
 vim.opt.relativenumber = true
@@ -35,7 +34,7 @@ vim.opt.synmaxcol = 300 -- syntax highlighting limit
 
 local undodir = vim.fn.expand("~/.vim/undodir")
 if vim.fn.isdirectory(undodir) == 0 then
-    vim.fn.mkdir(undodir, "p")
+	vim.fn.mkdir(undodir, "p")
 end
 
 vim.opt.backup = false
@@ -73,3 +72,8 @@ vim.opt.wildmode = "longest:full,full" -- complete longest common match
 vim.opt.diffopt:append("linematch:60") -- imporve diff
 vim.opt.redrawtime = 10000 -- increase neovim redraw tolerance
 vim.opt.maxmempattern = 20000 -- increase max memory
+
+vim.opt.winborder = "rounded"
+vim.opt.list = true
+
+vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"

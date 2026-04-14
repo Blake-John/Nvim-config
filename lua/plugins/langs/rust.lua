@@ -68,35 +68,48 @@ function setup_rust()
                 local map = vim.keymap.set
 
                 -- 核心 LSP 快捷键
-                map("n", "K", function() vim.cmd.RustLsp({ "hover", "actions" }) end, { desc = "Hover" })
+                map("n", "K", function()
+                    vim.cmd.RustLsp({ "hover", "actions" })
+                end, { desc = "Hover" })
                 -- map('n', '<leader>ca', function() vim.cmd.RustLsp('codeAction') end, { desc = "Code Action" })
                 map("n", "<leader>cr", vim.lsp.buf.rename, { desc = "Rename" })
-                map("n", "<leader>rr", function() vim.cmd.RustLsp({ "runnables", bang = true }) end,
-                    { desc = "run previous runnable", buffer = bufnr })
-                map("n", "<leader>rR", function() vim.cmd.RustLsp("runnables") end,
-                    { desc = "show runnables", buffer = bufnr })
-                map("n", "<leader>rd", function() vim.cmd.RustLsp("debuggables") end,
-                    { desc = "show debuggables", buffer = bufnr })
-                map("n", "<leader>rD", function() vim.cmd.RustLsp("openDocs") end,
-                    { desc = "open docs of current symbol", buffer = bufnr })
-                map("n", "<leader>rt", function() vim.cmd.RustLsp("testables") end,
-                    { desc = "show testables", buffer = bufnr })
+                map("n", "<leader>rr", function()
+                    vim.cmd.RustLsp({ "runnables", bang = true })
+                end, { desc = "run previous runnable", buffer = bufnr })
+                map("n", "<leader>rR", function()
+                    vim.cmd.RustLsp("runnables")
+                end, { desc = "show runnables", buffer = bufnr })
+                map("n", "<leader>rd", function()
+                    vim.cmd.RustLsp("debuggables")
+                end, { desc = "show debuggables", buffer = bufnr })
+                map("n", "<leader>rD", function()
+                    vim.cmd.RustLsp("openDocs")
+                end, { desc = "open docs of current symbol", buffer = bufnr })
+                map("n", "<leader>rt", function()
+                    vim.cmd.RustLsp("testables")
+                end, { desc = "show testables", buffer = bufnr })
 
-                map("n", "<leader>rcc", function() vim.cmd.RustLsp("openCargo") end,
-                    { desc = "open Cargo.toml", buffer = bufnr })
+                map("n", "<leader>rcc", function()
+                    vim.cmd.RustLsp("openCargo")
+                end, { desc = "open Cargo.toml", buffer = bufnr })
 
-                map("n", "<leader>ce", function() vim.cmd.RustLsp({ "explainError", "current" }) end,
-                    { desc = "explain errors", buffer = bufnr })
-                map("n", "<leader>cd", function() vim.cmd.RustLsp({ "renderDiagnostic", "current" }) end,
-                    { desc = "show line diagnostic", remap = true, buffer = bufnr })
+                map("n", "<leader>ce", function()
+                    vim.cmd.RustLsp({ "explainError", "current" })
+                end, { desc = "explain errors", buffer = bufnr })
+                map("n", "<leader>cd", function()
+                    vim.cmd.RustLsp({ "renderDiagnostic", "current" })
+                end, { desc = "show line diagnostic", remap = true, buffer = bufnr })
 
-                map("n", "]d", function() vim.cmd.RustLsp({ "renderDiagnostic", "cycle" }) end,
-                    { desc = "next line diagnostic", remap = true, buffer = bufnr })
-                map("n", "[d", function() vim.cmd.RustLsp({ "renderDiagnostic", "cycle_prev" }) end,
-                    { desc = "show line diagnostic", remap = true, buffer = bufnr })
+                map("n", "]d", function()
+                    vim.cmd.RustLsp({ "renderDiagnostic", "cycle" })
+                end, { desc = "next line diagnostic", remap = true, buffer = bufnr })
+                map("n", "[d", function()
+                    vim.cmd.RustLsp({ "renderDiagnostic", "cycle_prev" })
+                end, { desc = "show line diagnostic", remap = true, buffer = bufnr })
 
-                map("n", "<S-j>", function() vim.cmd.RustLsp("joinLines") end,
-                    { desc = "smart join lines", buffer = bufnr })
+                map("n", "<S-j>", function()
+                    vim.cmd.RustLsp("joinLines")
+                end, { desc = "smart join lines", buffer = bufnr })
             end,
         },
     }

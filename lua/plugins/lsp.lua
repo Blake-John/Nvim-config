@@ -64,9 +64,8 @@ autocmd("BufReadPre", {
         vim.lsp.enable("rust_analyzer")
 
         vim.cmd.packadd("nvim-lspconfig")
-    end
+    end,
 })
-
 
 -- =========================================================
 -- mason - lsp, linter, formatter management
@@ -76,8 +75,13 @@ autocmd("BufReadPre", {
     callback = function()
         vim.cmd.packadd("mason.nvim")
         require("mason").setup()
-    end
+    end,
 })
+vim.api.nvim_create_user_command("Mason", function()
+    vim.cmd.packadd("mason.nvim")
+    require("mason").setup()
+    vim.cmd("Mason")
+end, {})
 
 -- =========================================================
 -- lspsaga - breadcrumbs, definition, code action ...
@@ -94,7 +98,7 @@ autocmd("BufReadPre", {
 
         map("n", "<leader>o", ":Lspsaga outline<cr>", { desc = "Toggle Outline" })
         map("n", "<leader>cp", ":Lspsaga peek_definition<cr>", { desc = "Peek Definition" })
-    end
+    end,
 })
 
 -- ===========================================================
@@ -166,7 +170,6 @@ vim.lsp.config("rust_analyzer", {
         },
     },
 })
-
 
 -- ============================================================
 -- special lsp config

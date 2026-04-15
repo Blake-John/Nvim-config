@@ -356,5 +356,53 @@ vim.api.nvim_create_autocmd({ "WinLeave", "BufLeave" }, {
 	end,
 })
 
+-- 你希望 不渲染自定义状态栏 的文件类型
+local disabled_fts = {
+	"NvimTree",
+	"neo-tree",
+	"toggleterm",
+	"TelescopePrompt",
+	"TelescopeResults",
+	"fzf",
+	"dashboard",
+	"alpha",
+	"packer",
+	"lazy",
+	"help",
+	"qf",
+	"minifiles",
+}
+
+local function is_disabled_ft()
+	local ft = vim.bo.filetype
+	return vim.tbl_contains(disabled_fts, ft)
+end
+
+-- 自动命令
+
+vim.api.nvim_create_autocmd({ "WinEnter", "BufEnter" }, {
+	group = augroup,
+	callback = function()
+		if is_disabled_ft() then
+			-- 禁用：恢复默认 statusline
+			vim.opt_local.statusline = ""
+			return
+		end
+		-- 启用：你的自定义状态栏
+		vim.opt_local.statusline = "%!v:lua.statusline_render()"
+	end,
+})
+
+vim.api.nvim_create_autocmd({ "WinLeave", "BufLeave" }, {
+	group = augroup,
+	callback = function()
+		if is_disabled_ft() then
+			vim.opt_local.statusline = ""
+			return
+		end
+		vim.opt_local.statusline = "%!v:lua.statusline_inactive()"
+	end,
+})
+
 -- 初始化高亮
 setup_highlights()

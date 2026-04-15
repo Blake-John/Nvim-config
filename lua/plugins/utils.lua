@@ -131,6 +131,11 @@ vim.keymap.set("n", "<leader>e", function()
 		require("mini.files").open(vim.api.nvim_buf_get_name(0))
 	end
 end, { desc = "Toggle mini.files" })
+vim.keymap.set("n", "<esc>", function()
+	if vim.bo.filetype == "minifiles" then
+		require("mini.files").close()
+	end
+end, { desc = "Close mini.files" })
 
 -- require("mini.statusline").setup()
 

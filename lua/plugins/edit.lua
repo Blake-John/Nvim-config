@@ -82,6 +82,12 @@ autocmd("InsertEnter", {
 				},
 				-- Recommended to avoid unnecessary request
 				trigger = { prefetch_on_insert = false },
+				list = {
+					selection = {
+						preselect = true,
+						auto_insert = false,
+					},
+				},
 			},
 			signature = {
 				enabled = true,
@@ -89,6 +95,7 @@ autocmd("InsertEnter", {
 					border = "rounded",
 				},
 			},
+			cmdline = { enabled = true },
 		})
 		require("conform").setup({
 			formatters_by_ft = {

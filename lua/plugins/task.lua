@@ -80,7 +80,7 @@ end
 local function render_list(tasks)
 	local lines = {}
 	for i, t in ipairs(tasks) do
-		table.insert(lines, i .. ". " .. t.name .. " - " .. t.cmd)
+		table.insert(lines, i .. ". " .. t.name .. ' \t " ' .. t.cmd .. ' " ')
 	end
 	vim.api.nvim_buf_set_lines(state.buf, 0, -1, false, lines)
 	vim.bo[state.buf].modifiable = false

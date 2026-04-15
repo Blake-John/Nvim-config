@@ -132,7 +132,7 @@ vim.keymap.set("n", "<leader>e", function()
 	end
 end, { desc = "Toggle mini.files" })
 
-require("mini.statusline").setup()
+-- require("mini.statusline").setup()
 
 require("mini.splitjoin").setup({
 	mappings = {
@@ -192,13 +192,13 @@ require("which-key").add({
 -- ===============================================================
 -- nvim.undotree - manage undo
 -- ===============================================================
-autocmd("BufReadPre", {
-	once = true,
-	callback = function()
-		vim.cmd.packadd("nvim.undotree")
-		map("n", "<leader>u", ":Undotree<cr>", { desc = "Toggle Undotree" })
-	end,
-})
+-- autocmd("BufReadPre", {
+-- 	once = true,
+-- 	callback = function()
+-- 		vim.cmd.packadd("nvim.undotree")
+-- 		map("n", "<leader>u", ":Undotree<cr>", { desc = "Toggle Undotree" })
+-- 	end,
+-- })
 
 -- ===============================================================
 -- flash.nvim - easily jump and find

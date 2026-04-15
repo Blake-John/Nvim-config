@@ -2,7 +2,7 @@
 
 -- Git branch function with caching and Nerd Font icon
 local cached
-branch = ""
+local branch = ""
 local last_check = 0
 local function git_branch()
 	local now = vim.loop.now()

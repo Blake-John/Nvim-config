@@ -146,6 +146,7 @@ require("mini.splitjoin").setup({
 })
 map("n", "<leader>ts", ":lua MiniSplitjoin.toggle()<cr>", { desc = "Toggle Params Split" })
 
+
 -- ==============================================================
 -- gitsigns - show the git status
 -- ==============================================================

@@ -75,7 +75,7 @@ map("n", "<leader>cr", vim.lsp.buf.rename, { desc = "rename symbol" })
 map({ "n", "i" }, "<C-s>", "<esc>:w<cr>", { desc = "Save file" })
 map({ "n", "i" }, "<C-q>", "<esc>:qa<cr>", { desc = "Quit Nvim" })
 
-map("n", "<esc>", ":nohlsearch<cr>")
+map("n", "<esc>", "<esc>:nohlsearch<cr>")
 map("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Replace curosr word" })
 
 map("n", "yp", function()
@@ -102,7 +102,7 @@ local function jump_next_char()
 
 	-- 只跳：) ] } ' " 这几个结束符
 	-- 一次只跳一格！绝对不会多跳
-	if next_char ~= "" and next_char:match("[%)%]%}`\"',]") then
+	if next_char ~= "" and next_char:match("[%)%]%}`\"'>,;]") then
 		return "<Right>"
 	end
 

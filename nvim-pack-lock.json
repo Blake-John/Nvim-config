@@ -21,6 +21,10 @@
       "rev": "0f536967abd097d9a4275087483f15d012418740",
       "src": "https://github.com/Saecki/crates.nvim"
     },
+    "fff.nvim": {
+      "rev": "1bb76f6da6872c56ce34df8a2e33e977187be5f9",
+      "src": "https://github.com/dmtrKovalenko/fff.nvim"
+    },
     "flash.nvim": {
       "rev": "fcea7ff883235d9024dc41e638f164a450c14ca2",
       "src": "https://github.com/folke/flash.nvim"

@@ -7,6 +7,7 @@ vim.pack.add({
 	"https://github.com/folke/which-key.nvim",
 	-- "https://github.com/nvim-tree/nvim-web-devicons",
 	"https://github.com/folke/flash.nvim",
+	"https://github.com/dmtrKovalenko/fff.nvim",
 })
 
 local map = vim.keymap.set
@@ -33,6 +34,35 @@ local autocmd = vim.api.nvim_create_autocmd
 -- end, { desc = "Toggle NvimTree" })
 
 -- ============================================================
+-- fff - a faster finder to find files
+-- ============================================================
+vim.cmd.packadd("fff.nvim")
+
+vim.api.nvim_create_autocmd("PackChanged", {
+	callback = function(ev)
+		local name, kind = ev.data.spec.name, ev.data.kind
+		if name == "fff.nvim" and (kind == "install" or kind == "update") then
+			if not ev.data.active then
+				vim.cmd.packadd("fff.nvim")
+			end
+			require("fff.download").download_or_build_binary()
+		end
+	end,
+})
+
+vim.g.fff = {
+	lazy_sync = true,
+	debug = { enabled = true, show_scores = true },
+}
+
+vim.keymap.set("n", "<leader>ff", function()
+	require("fff").find_files()
+end, { desc = "FFFind files" })
+vim.keymap.set("n", "<leader>fg", function()
+	require("fff").live_grep()
+end, { desc = "FFFLive Grep" })
+
+-- ============================================================
 -- fzf-lua - a fuzzy finder to find any you want
 -- ============================================================
 vim.cmd.packadd("fzf-lua")
@@ -41,13 +71,13 @@ require("fzf-lua").setup({
 		file_icons = "mini",
 	},
 })
-vim.cmd("FzfLua register_ui_select")
-map("n", "<leader>ff", function()
-	require("fzf-lua").files()
-end, { desc = "Find Files" })
-map("n", "<leader>fg", function()
-	require("fzf-lua").live_grep()
-end, { desc = "Live Grep" })
+-- vim.cmd("FzfLua register_ui_select")
+-- map("n", "<leader>ff", function()
+-- 	require("fzf-lua").files()
+-- end, { desc = "Find Files" })
+-- map("n", "<leader>fg", function()
+-- 	require("fzf-lua").live_grep()
+-- end, { desc = "Live Grep" })
 map("n", "<leader>fb", function()
 	require("fzf-lua").buffers()
 end, { desc = "Find Buffers" })
@@ -145,7 +175,6 @@ require("mini.splitjoin").setup({
 	},
 })
 map("n", "<leader>ts", ":lua MiniSplitjoin.toggle()<cr>", { desc = "Toggle Params Split" })
-
 
 -- ==============================================================
 -- gitsigns - show the git status

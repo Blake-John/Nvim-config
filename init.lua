@@ -9,4 +9,12 @@ require("plugins.colorscheme")
 require("plugins.edit")
 require("plugins.floatterm")
 require("plugins.task")
-require("plugins.animate")
+
+-- 检测是否在 Neovide 中运行
+if vim.g.neovide then
+	print("current is in neovide")
+	vim.o.background = "dark"
+else
+	-- 普通终端配置
+	require("plugins.animate")
+end

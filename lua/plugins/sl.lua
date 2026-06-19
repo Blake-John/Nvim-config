@@ -371,6 +371,9 @@ local disabled_fts = {
 	"help",
 	"qf",
 	"minifiles",
+	"fff_list",
+	"fff_input",
+	"fff_file_info",
 }
 
 local function is_disabled_ft()

@@ -1,60 +1,60 @@
 function setup_rust()
-	vim.lsp.config("rust_analyzer", {
-		cargo = {
-			allFeatures = true,
-			loadOutDirsFromCheck = true,
-			buildScripts = {
-				enable = true,
-			},
-		},
-		checkOnSave = true,
-		check = { command = "clippy" },
-		diagnostics = {
-			enable = true,
-		},
-		procMacro = {
-			enable = true,
-		},
-		inlayHints = {
-			enable = true,
-			-- 类型提示
-			typeHints = { enable = true },
-			-- 函数/方法形参名字提示
-			parameterHints = { enable = true },
-			-- 链式调用中间类型提示
-			chainingHints = { enable = true },
-			-- 闭链括号提示
-			closingBraceHints = { enable = true, minLines = 0 },
-			-- 生命周期提示
-			lifetimeElisionHints = {
-				enable = true,
-				useParameterNames = true,
-			},
-			-- 绑定模式提示（ref / ref mut）
-			bindingModeHints = { enable = true },
-			-- 闭包捕获提示
-			closureCaptureHints = { enable = true },
-			-- 闭包返回类型提示
-			closureReturnTypeHints = { enable = "always" },
-			-- 闭包显示样式
-			-- closureStyle = "impl_fn",
-			-- 枚举判别式提示
-			discriminantHints = { enable = "always" },
-			-- 重借用提示 &mut -> &mut
-			-- reborrowHints = { enable = "always" },
-			-- 隐式 drop 提示（如离开作用域时）
-			-- implicitDrops = {
-			--     enable = true, -- 高亮隐式 drop 的位置
-			-- },
-		},
-		lens = {
-			enable = true,
-			references = {
-				adt = { enable = true },
-				method = { enable = true },
-			},
-		},
-	})
+	-- vim.lsp.config("rust_analyzer", {
+	-- 	cargo = {
+	-- 		allFeatures = true,
+	-- 		loadOutDirsFromCheck = true,
+	-- 		buildScripts = {
+	-- 			enable = true,
+	-- 		},
+	-- 	},
+	-- 	checkOnSave = true,
+	-- 	check = { command = "clippy" },
+	-- 	diagnostics = {
+	-- 		enable = true,
+	-- 	},
+	-- 	procMacro = {
+	-- 		enable = true,
+	-- 	},
+	-- 	inlayHints = {
+	-- 		enable = true,
+	-- 		-- 类型提示
+	-- 		typeHints = { enable = true },
+	-- 		-- 函数/方法形参名字提示
+	-- 		parameterHints = { enable = true },
+	-- 		-- 链式调用中间类型提示
+	-- 		chainingHints = { enable = true },
+	-- 		-- 闭链括号提示
+	-- 		closingBraceHints = { enable = true, minLines = 0 },
+	-- 		-- 生命周期提示
+	-- 		lifetimeElisionHints = {
+	-- 			enable = true,
+	-- 			useParameterNames = true,
+	-- 		},
+	-- 		-- 绑定模式提示（ref / ref mut）
+	-- 		bindingModeHints = { enable = true },
+	-- 		-- 闭包捕获提示
+	-- 		closureCaptureHints = { enable = true },
+	-- 		-- 闭包返回类型提示
+	-- 		closureReturnTypeHints = { enable = "always" },
+	-- 		-- 闭包显示样式
+	-- 		-- closureStyle = "impl_fn",
+	-- 		-- 枚举判别式提示
+	-- 		discriminantHints = { enable = "always" },
+	-- 		-- 重借用提示 &mut -> &mut
+	-- 		-- reborrowHints = { enable = "always" },
+	-- 		-- 隐式 drop 提示（如离开作用域时）
+	-- 		-- implicitDrops = {
+	-- 		--     enable = true, -- 高亮隐式 drop 的位置
+	-- 		-- },
+	-- 	},
+	-- 	lens = {
+	-- 		enable = true,
+	-- 		references = {
+	-- 			adt = { enable = true },
+	-- 			method = { enable = true },
+	-- 		},
+	-- 	},
+	-- })
 	local opts = {
 		server = {
 			on_attach = function(client, bufnr)

@@ -61,7 +61,7 @@ autocmd("BufReadPre", {
         vim.lsp.enable("lua_ls")
         vim.lsp.enable("clangd")
         vim.lsp.enable("basedpyright")
-        vim.lsp.enable("rust_analyzer")
+        -- vim.lsp.enable("rust_analyzer")
 
         vim.cmd.packadd("nvim-lspconfig")
     end,
